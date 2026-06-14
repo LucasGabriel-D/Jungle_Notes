@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 class MateriaController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         return response()->json(Materia::withCount('apuntes')->get());
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         $validated = $request->validate([
             'nombre' => 'required|unique:materias',
@@ -25,12 +25,12 @@ class MateriaController extends Controller
         return response()->json($materia, 201);
     }
 
-    public function show(Materia $materia)
+    public function show(Materia $materia): \Illuminate\Http\JsonResponse
     {
         return response()->json($materia->load('apuntes'));
     }
 
-    public function update(Request $request, Materia $materia)
+    public function update(Request $request, Materia $materia): \Illuminate\Http\JsonResponse
     {
         $validated = $request->validate([
             'nombre' => 'required|unique:materias,nombre,' . $materia->id,
@@ -43,7 +43,7 @@ class MateriaController extends Controller
         return response()->json($materia);
     }
 
-    public function destroy(Materia $materia)
+    public function destroy(Materia $materia): \Illuminate\Http\JsonResponse
     {
         $materia->delete();
 

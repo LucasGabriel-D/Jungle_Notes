@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\View\View
     {
         $totalApuntes = Apunte::count();
         $totalMaterias = Materia::count();

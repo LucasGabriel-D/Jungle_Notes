@@ -3,6 +3,9 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MateriaController;
+use App\Http\Controllers\ComentarioController;
 use App\Livewire\ManageApuntes;
 use Illuminate\Support\Facades\Route;
 

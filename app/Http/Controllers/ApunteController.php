@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class ApunteController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         return response()->json(Apunte::with(['user', 'materia'])->latest()->get());
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        $validated = $request->validate([
+        $request->validate([
             'titulo' => 'required|min:3',
             'materia_id' => 'required|exists:materias,id',
             'archivo' => 'required|file|mimes:pdf,doc,docx|max:10240',

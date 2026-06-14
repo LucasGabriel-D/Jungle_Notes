@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ComentariosApunte extends Component
 {
-    public $apunte_id;
-    public $contenido;
+    public int $apunte_id;
+    public string $contenido = '';
 
     protected $rules = [
         'contenido' => 'required|min:3|max:500',
@@ -21,12 +21,12 @@ class ComentariosApunte extends Component
         'contenido.max' => 'El comentario no puede superar los 500 caracteres.',
     ];
 
-    public function mount($apunte_id)
+    public function mount(int $apunte_id): void
     {
         $this->apunte_id = $apunte_id;
     }
 
-    public function store()
+    public function store(): void
     {
         $this->validate();
 
@@ -40,7 +40,7 @@ class ComentariosApunte extends Component
         session()->flash('success', 'Comentario publicado.');
     }
 
-    public function delete($id)
+    public function delete(int $id): void
     {
         $comentario = Comentario::findOrFail($id);
         if ($comentario->user_id === Auth::id()) {
@@ -49,7 +49,7 @@ class ComentariosApunte extends Component
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         $comentarios = Comentario::with('user')
             ->where('apunte_id', $this->apunte_id)

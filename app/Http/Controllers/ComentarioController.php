@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 class ComentarioController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         return response()->json(Comentario::with('user', 'apunte')->latest()->get());
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         $validated = $request->validate([
             'apunte_id' => 'required|exists:apuntes,id',
@@ -28,7 +28,7 @@ class ComentarioController extends Controller
         return response()->json($comentario->load('user'), 201);
     }
 
-    public function destroy(Comentario $comentario)
+    public function destroy(Comentario $comentario): \Illuminate\Http\JsonResponse
     {
         $this->authorize('delete', $comentario);
         $comentario->delete();

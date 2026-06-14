@@ -13,11 +13,11 @@ class ManageApuntes extends Component
 {
     use WithFileUploads;
 
-    public $titulo;
-    public $descripcion;
-    public $materia_id;
+    public string $titulo = '';
+    public ?string $descripcion = null;
+    public string $materia_id = '';
     public $archivo;
-    public $search = '';
+    public string $search = '';
 
     protected $rules = [
         'titulo' => 'required|min:3',
@@ -34,7 +34,7 @@ class ManageApuntes extends Component
         'archivo.max' => 'El archivo no puede superar los 10MB.',
     ];
 
-    public function store()
+    public function store(): void
     {
         $this->validate();
 
@@ -53,7 +53,7 @@ class ManageApuntes extends Component
         session()->flash('message', 'Apunte subido correctamente.');
     }
 
-    public function delete($id)
+    public function delete(int $id): void
     {
         $apunte = Apunte::findOrFail($id);
         if ($apunte->user_id === Auth::id()) {
@@ -63,7 +63,7 @@ class ManageApuntes extends Component
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         $materias = Materia::all();
         $apuntes = Apunte::with(['user', 'materia'])
