@@ -30,7 +30,6 @@ class ComentarioController extends Controller
 
     public function destroy(Comentario $comentario): \Illuminate\Http\JsonResponse
     {
-        $this->authorize('delete', $comentario);
         $comentario->delete();
 
         return response()->json(null, 204);

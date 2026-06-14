@@ -12,12 +12,14 @@ class Comentario extends Model
 
     protected $fillable = ['user_id', 'apunte_id', 'contenido'];
 
-    public function user()
+    /** @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, $this> */
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function apunte()
+    /** @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Apunte, $this> */
+    public function apunte(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Apunte::class);
     }

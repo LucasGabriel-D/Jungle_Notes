@@ -7,6 +7,7 @@ use App\Models\Materia;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/** @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Apunte> */
 class ApunteFactory extends Factory
 {
     protected $model = Apunte::class;

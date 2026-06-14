@@ -16,17 +16,19 @@ class ManageApuntes extends Component
     public string $titulo = '';
     public ?string $descripcion = null;
     public string $materia_id = '';
-    public $archivo;
+    public mixed $archivo;
     public string $search = '';
 
-    protected $rules = [
+    /** @var array<string, string> */
+    protected array $rules = [
         'titulo' => 'required|min:3',
         'descripcion' => 'nullable',
         'materia_id' => 'required|exists:materias,id',
         'archivo' => 'required|file|mimes:pdf,doc,docx|max:10240',
     ];
 
-    protected $messages = [
+    /** @var array<string, string> */
+    protected array $messages = [
         'titulo.required' => 'El título es obligatorio.',
         'materia_id.required' => 'Debes seleccionar una materia.',
         'archivo.required' => 'El archivo es obligatorio.',

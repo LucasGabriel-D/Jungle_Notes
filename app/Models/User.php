@@ -45,12 +45,14 @@ class User extends Authenticatable
         ];
     }
 
-    public function apuntes()
+    /** @return \Illuminate\Database\Eloquent\Relations\HasMany<Apunte, $this> */
+    public function apuntes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Apunte::class);
     }
 
-    public function comentarios()
+    /** @return \Illuminate\Database\Eloquent\Relations\HasMany<Comentario, $this> */
+    public function comentarios(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comentario::class);
     }

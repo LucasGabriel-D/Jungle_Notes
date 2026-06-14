@@ -11,11 +11,13 @@ class ComentariosApunte extends Component
     public int $apunte_id;
     public string $contenido = '';
 
-    protected $rules = [
+    /** @var array<string, string> */
+    protected array $rules = [
         'contenido' => 'required|min:3|max:500',
     ];
 
-    protected $messages = [
+    /** @var array<string, string> */
+    protected array $messages = [
         'contenido.required' => 'El comentario no puede estar vacío.',
         'contenido.min' => 'El comentario debe tener al menos 3 caracteres.',
         'contenido.max' => 'El comentario no puede superar los 500 caracteres.',

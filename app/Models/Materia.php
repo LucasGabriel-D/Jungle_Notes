@@ -12,7 +12,8 @@ class Materia extends Model
 
     protected $fillable = ['nombre', 'descripcion', 'anio'];
 
-    public function apuntes()
+    /** @return \Illuminate\Database\Eloquent\Relations\HasMany<Apunte, $this> */
+    public function apuntes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Apunte::class);
     }

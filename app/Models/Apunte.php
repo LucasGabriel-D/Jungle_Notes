@@ -12,17 +12,20 @@ class Apunte extends Model
 
     protected $fillable = ['user_id', 'materia_id', 'titulo', 'descripcion', 'ruta_archivo'];
 
-    public function user()
+    /** @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, $this> */
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function materia()
+    /** @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Materia, $this> */
+    public function materia(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Materia::class);
     }
 
-    public function comentarios()
+    /** @return \Illuminate\Database\Eloquent\Relations\HasMany<Comentario, $this> */
+    public function comentarios(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comentario::class);
     }
