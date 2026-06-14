@@ -3,12 +3,14 @@
 namespace App\Livewire;
 
 use App\Models\Comentario;
-use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
+use Livewire\Component;
 
 class ComentariosApunte extends Component
 {
     public int $apunte_id;
+
     public string $contenido = '';
 
     /** @var array<string, string> */
@@ -51,7 +53,7 @@ class ComentariosApunte extends Component
         }
     }
 
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         $comentarios = Comentario::with('user')
             ->where('apunte_id', $this->apunte_id)

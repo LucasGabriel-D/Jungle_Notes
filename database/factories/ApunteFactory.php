@@ -7,7 +7,7 @@ use App\Models\Materia;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/** @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Apunte> */
+/** @extends Factory<Apunte> */
 class ApunteFactory extends Factory
 {
     protected $model = Apunte::class;
@@ -19,7 +19,7 @@ class ApunteFactory extends Factory
             'materia_id' => Materia::factory(),
             'titulo' => fake()->words(4, true),
             'descripcion' => fake()->optional()->paragraph(),
-            'ruta_archivo' => 'apuntes/materia_1/' . fake()->uuid() . '.pdf',
+            'ruta_archivo' => 'apuntes/materia_1/'.fake()->uuid().'.pdf',
         ];
     }
 }

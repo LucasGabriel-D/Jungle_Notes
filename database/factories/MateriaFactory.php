@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\Materia;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/** @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Materia> */
+/** @extends Factory<Materia> */
 class MateriaFactory extends Factory
 {
     protected $model = Materia::class;

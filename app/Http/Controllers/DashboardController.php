@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apunte;
-use App\Models\Materia;
 use App\Models\Comentario;
-use Illuminate\Http\Request;
+use App\Models\Materia;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(): \Illuminate\View\View
+    public function index(): View
     {
         $totalApuntes = Apunte::count();
         $totalMaterias = Materia::count();

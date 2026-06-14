@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comentario;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ComentarioController extends Controller
 {
-    public function index(): \Illuminate\Http\JsonResponse
+    public function index(): JsonResponse
     {
         return response()->json(Comentario::with('user', 'apunte')->latest()->get());
     }
 
-    public function store(Request $request): \Illuminate\Http\JsonResponse
+    public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
             'apunte_id' => 'required|exists:apuntes,id',
@@ -28,7 +29,7 @@ class ComentarioController extends Controller
         return response()->json($comentario->load('user'), 201);
     }
 
-    public function destroy(Comentario $comentario): \Illuminate\Http\JsonResponse
+    public function destroy(Comentario $comentario): JsonResponse
     {
         $comentario->delete();
 

@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apunte;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ApunteController extends Controller
 {
-    public function index(): \Illuminate\Http\JsonResponse
+    public function index(): JsonResponse
     {
         return response()->json(Apunte::with(['user', 'materia'])->latest()->get());
     }
 
-    public function store(Request $request): \Illuminate\Http\JsonResponse
+    public function store(Request $request): JsonResponse
     {
         $request->validate([
             'titulo' => 'required|min:3',
@@ -21,8 +22,8 @@ class ApunteController extends Controller
         ]);
 
         $path = $request->file('archivo')->storeAs(
-            "apuntes/materia_" . $request->materia_id,
-            time() . '_' . $request->file('archivo')->getClientOriginalName(),
+            'apuntes/materia_'.$request->materia_id,
+            time().'_'.$request->file('archivo')->getClientOriginalName(),
             'public'
         );
 

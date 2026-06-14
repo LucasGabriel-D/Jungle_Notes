@@ -4,19 +4,24 @@ namespace App\Livewire;
 
 use App\Models\Apunte;
 use App\Models\Materia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 
 class ManageApuntes extends Component
 {
     use WithFileUploads;
 
     public string $titulo = '';
+
     public ?string $descripcion = null;
+
     public string $materia_id = '';
+
     public mixed $archivo;
+
     public string $search = '';
 
     /** @var array<string, string> */
@@ -40,8 +45,8 @@ class ManageApuntes extends Component
     {
         $this->validate();
 
-        $nombreArchivo = time() . '_' . $this->archivo->getClientOriginalName();
-        $ruta = $this->archivo->storeAs("apuntes/materia_" . $this->materia_id, $nombreArchivo, 'public');
+        $nombreArchivo = time().'_'.$this->archivo->getClientOriginalName();
+        $ruta = $this->archivo->storeAs('apuntes/materia_'.$this->materia_id, $nombreArchivo, 'public');
 
         Apunte::create([
             'user_id' => Auth::id(),
@@ -65,15 +70,15 @@ class ManageApuntes extends Component
         }
     }
 
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         $materias = Materia::all();
         $apuntes = Apunte::with(['user', 'materia'])
             ->where(function ($q) {
-                $q->where('titulo', 'like', '%' . $this->search . '%')
-                  ->orWhereHas('materia', function ($query) {
-                      $query->where('nombre', 'like', '%' . $this->search . '%');
-                  });
+                $q->where('titulo', 'like', '%'.$this->search.'%')
+                    ->orWhereHas('materia', function ($query) {
+                        $query->where('nombre', 'like', '%'.$this->search.'%');
+                    });
             })
             ->latest()
             ->get();
