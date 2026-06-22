@@ -17,7 +17,7 @@
                 <div class="flex flex-col items-center lg:items-start mb-8">
                     <div class="flex items-center gap-2 mb-3">
                         <div class="flex items-center gap-1.5">
-                            
+                            <img src="{{ asset('images/iconverde.png') }}" class="w-18 h-18 object-contain" alt="Logo">
                             <h1 class="text-2xl font-bold tracking-tight text-neutral-900">
                                 <span class="text-emerald-600">Jungle</span>Notes
                             </h1>
