@@ -56,6 +56,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Landing Page Theme
+    |--------------------------------------------------------------------------
+    |
+    | This value determines which landing page theme to use. Supported values:
+    | "morado" for the purple theme (iniciomorado) or "verde" for the green
+    | theme (inicioverde). Set this in your ".env" file.
+    |
+    */
+
+    'landing_theme' => env('APP_LANDING_THEME', 'morado'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |

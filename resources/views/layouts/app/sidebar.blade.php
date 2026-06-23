@@ -15,6 +15,18 @@
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="book-open" :href="route('materias.index')" :current="request()->routeIs('materias.*')" wire:navigate>
+                        {{ __('Mis Materias') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="document-text" :href="route('apuntes.index')" :current="request()->routeIs('apuntes.*')" wire:navigate>
+                        {{ __('Bloc de Notas') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="calendar-days" href="#" :current="request()->routeIs('calendario.*')" wire:navigate>
+                        {{ __('Calendario') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="users" href="#" :current="request()->routeIs('equipo.*')" wire:navigate>
+                        {{ __('Equipo Iceberg') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
