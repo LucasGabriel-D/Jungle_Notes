@@ -27,8 +27,8 @@
     <nav
         class="flex justify-between items-center py-2 px-8 md:px-16 bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
         <div class="flex items-center gap-3">
-            <img src="{{ asset('images/logo2.png') }}" alt="Logo Jungle Notes"
-                class="h-20 md:h-24 w-auto object-contain scale-150">
+            <img src="{{ asset('images/jungle_notes_lgo.png') }}" alt="Logo Jungle Notes"
+                class="h-20 md:h-24 w-auto object-contain scale-120">
         </div>
 
             <div class="flex items-center gap-6">
