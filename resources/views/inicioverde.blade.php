@@ -34,9 +34,13 @@
             <div class="flex items-center gap-6">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}"
-                            class="bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-emerald-700 transition-all duration-200 shadow-sm shadow-emerald-200">Ir
-                            al Panel</a>
+                        <div class="flex items-center gap-3">
+                            <span class="text-sm font-semibold text-gray-700">{{ auth()->user()->name }}</span>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-emerald-700 transition-all duration-200 shadow-sm shadow-emerald-200 cursor-pointer">Cerrar sesión</button>
+                            </form>
+                        </div>
                     @else
                         <a href="{{ route('login') }}"
                             class="text-gray-600 hover:text-emerald-700 font-semibold transition-colors">Iniciar Sesión</a>
@@ -68,10 +72,17 @@
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="{{ route('register') }}"
-                class="w-full sm:w-auto bg-emerald-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-emerald-700 transition-all duration-200 shadow-xl shadow-emerald-200 hover:scale-[1.02]">
-                Crear una cuenta gratis
-            </a>
+            @auth
+                <a href="{{ route('dashboard') }}"
+                    class="w-full sm:w-auto bg-emerald-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-emerald-700 transition-all duration-200 shadow-xl shadow-emerald-200 hover:scale-[1.02]">
+                    Ir al Panel
+                </a>
+            @else
+                <a href="{{ route('register') }}"
+                    class="w-full sm:w-auto bg-emerald-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-emerald-700 transition-all duration-200 shadow-xl shadow-emerald-200 hover:scale-[1.02]">
+                    Crear una cuenta gratis
+                </a>
+            @endauth
         </div>
     </main>
 

@@ -6,14 +6,15 @@ use App\Http\Controllers\MateriaController;
 use App\Livewire\ManageApuntes;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'inicioverde')->name('home');
-Route::view('/', config('app.landing_theme') === 'verde' ? 'inicioverde' : 'iniciomorado')->name('home');
+Route::get('/', function () {
+    $theme = config('app.landing_theme', 'morado');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-});
+    return view($theme === 'verde' ? 'inicioverde' : 'iniciomorado');
+})->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::view('/equipo', 'equipo')->name('equipo');
     Route::resource('materias', MateriaController::class);
     Route::get('/apuntes', ManageApuntes::class)->name('apuntes.index');
     Route::resource('comentarios', ComentarioController::class);

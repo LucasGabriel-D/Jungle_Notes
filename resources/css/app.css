@@ -11,33 +11,18 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-    --color-zinc-50: #fafafa;
-    --color-zinc-100: #f5f5f5;
-    --color-zinc-200: #e5e5e5;
-    --color-zinc-300: #d4d4d4;
-    --color-zinc-400: #a3a3a3;
-    --color-zinc-500: #737373;
-    --color-zinc-600: #525252;
-    --color-zinc-700: #404040;
-    --color-zinc-800: #262626;
-    --color-zinc-900: #171717;
-    --color-zinc-950: #0a0a0a;
-
-    --color-accent: var(--color-neutral-800);
-    --color-accent-content: var(--color-neutral-800);
+    --color-accent: var(--color-emerald-600);
+    --color-accent-content: var(--color-emerald-600);
     --color-accent-foreground: var(--color-white);
 }
 
-@layer theme {
-    .dark {
-        --color-accent: var(--color-white);
-        --color-accent-content: var(--color-white);
-        --color-accent-foreground: var(--color-neutral-800);
-    }
+:root {
+    --color-accent: var(--color-emerald-600);
+    --color-accent-content: var(--color-emerald-600);
+    --color-accent-foreground: var(--color-white);
 }
 
 @layer base {
-
     *,
     ::after,
     ::before,
@@ -52,7 +37,7 @@
 }
 
 [data-flux-label] {
-    @apply  !mb-0 !leading-tight;
+    @apply !mb-0 !leading-tight;
 }
 
 input:focus[data-flux-control],
@@ -61,6 +46,115 @@ select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
 
-/* \[:where(&)\]:size-4 {
-    @apply size-4;
-} */
+[data-flux-sidebar] {
+    --color-accent: var(--color-emerald-600);
+    --color-accent-content: var(--color-emerald-600);
+    --color-accent-foreground: var(--color-white);
+}
+
+[data-flux-sidebar] [data-flux-sidebar-item][data-current] {
+    background-color: color-mix(in srgb, var(--color-emerald-600) 10%, transparent);
+    color: var(--color-emerald-700);
+}
+
+[data-flux-sidebar] [data-flux-sidebar-item]:hover {
+    background-color: var(--color-emerald-50);
+    color: var(--color-emerald-700);
+}
+
+[data-flux-sidebar] [data-flux-sidebar-item] {
+    color: var(--color-neutral-600);
+    transition: all 0.15s ease;
+}
+
+[data-flux-sidebar] [data-flux-sidebar-profile]:hover {
+    background-color: var(--color-emerald-50);
+}
+
+[data-flux-sidebar] [data-flux-sidebar-profile][data-flux-sidebar-profile] [data-flux-icon] {
+    color: var(--color-emerald-600);
+}
+
+[data-flux-menu] {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-neutral-200);
+}
+
+[data-flux-menu-item] {
+    color: var(--color-neutral-700);
+}
+
+[data-flux-menu-item]:hover {
+    background-color: var(--color-emerald-50);
+}
+
+[data-flux-menu-item] [data-flux-icon] {
+    color: var(--color-emerald-600);
+}
+
+[data-flux-menu-item]:hover {
+    background-color: var(--color-emerald-50);
+}
+
+[data-flux-sidebar] [data-flux-sidebar-profile] {
+    color: var(--color-neutral-700);
+}
+
+[data-flux-sidebar] [data-flux-sidebar-profile] > span {
+    color: var(--color-neutral-800);
+}
+
+[data-flux-sidebar] [data-flux-sidebar-profile] [data-flux-heading] {
+    color: var(--color-neutral-900);
+}
+
+[data-flux-sidebar] [data-flux-sidebar-profile] [data-flux-text] {
+    color: var(--color-neutral-500);
+}
+
+[data-flux-sidebar] [data-flux-sidebar-profile] [data-flux-icon] {
+    color: var(--color-emerald-600);
+}
+
+[data-flux-sidebar] [data-flux-sidebar-heading] {
+    color: var(--color-neutral-400);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+[data-flux-navlist-item] {
+    color: var(--color-neutral-600);
+    transition: all 0.15s ease;
+}
+
+[data-flux-navlist-item]:hover {
+    background-color: var(--color-emerald-50);
+    color: var(--color-emerald-700);
+}
+
+[data-flux-navlist-item][data-current] {
+    background-color: color-mix(in srgb, var(--color-emerald-600) 10%, transparent);
+    color: var(--color-emerald-700);
+}
+
+[data-flux-heading] {
+    color: var(--color-neutral-800);
+}
+
+[data-flux-subheading] {
+    color: var(--color-neutral-600);
+}
+
+button, [role="button"], [data-flux-button] {
+    cursor: pointer;
+}
+
+[data-flux-input] input {
+    color: var(--color-neutral-900);
+}
+
+[data-flux-label] {
+    color: var(--color-neutral-700);
+}

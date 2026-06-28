@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('partials.head')
     </head>
-    <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky collapsible="mobile" class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
-            <flux:sidebar.header>
-                <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
-                <flux:sidebar.collapse class="lg:hidden" />
+    <body class="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 antialiased">
+        <flux:sidebar sticky collapsible="mobile" class="border-e border-neutral-200 bg-white shadow-sm">
+            <flux:sidebar.header class="flex items-center justify-between w-full">
+                <a href="{{ route('home') }}" class="flex items-center gap-3 px-2 py-1 min-w-0 no-underline">
+                    <img src="{{ asset('images/iconverde.png') }}" class="w-14 h-14 shrink-0 object-contain" alt="Logo">
+                    <div class="min-w-0">
+                        <h1 class="text-xl font-bold text-neutral-900 flex items-center gap-1.5 truncate">
+                            <span class="text-emerald-600 shrink-0">Jungle</span><span class="truncate">Notes</span>
+                        </h1>
+                        <p class="text-[10px] text-neutral-400 font-medium truncate">UTN FRRE</p>
+                    </div>
+                </a>
+                <flux:sidebar.collapse class="lg:hidden shrink-0 ml-2" />
             </flux:sidebar.header>
 
             <flux:sidebar.nav>
-                <flux:sidebar.group :heading="__('Platform')" class="grid">
+                <flux:sidebar.group :heading="__('Navegación')" class="grid">
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
+                        {{ __('Panel General') }}
                     </flux:sidebar.item>
                     <flux:sidebar.item icon="book-open" :href="route('materias.index')" :current="request()->routeIs('materias.*')" wire:navigate>
                         {{ __('Mis Materias') }}
@@ -24,30 +32,31 @@
                     <flux:sidebar.item icon="calendar-days" href="#" :current="request()->routeIs('calendario.*')" wire:navigate>
                         {{ __('Calendario') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="users" href="#" :current="request()->routeIs('equipo.*')" wire:navigate>
-                        {{ __('Equipo Iceberg') }}
-                    </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
             <flux:spacer />
 
             <flux:sidebar.nav>
-                <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                    {{ __('Repository') }}
-                </flux:sidebar.item>
-
-                <flux:sidebar.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                    {{ __('Documentation') }}
-                </flux:sidebar.item>
+                <flux:sidebar.group :heading="__('Equipo')" class="grid">
+                    <flux:sidebar.item icon="users" :href="route('equipo')" :current="request()->routeIs('equipo')" wire:navigate>
+                        {{ __('Equipo Iceberg') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
             </flux:sidebar.nav>
 
-            <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
+            <x-desktop-user-menu class="hidden lg:block" />
         </flux:sidebar>
 
-        <!-- Mobile User Menu -->
-        <flux:header class="lg:hidden">
+        <!-- Mobile Header with User Menu -->
+        <flux:header class="lg:hidden bg-white/80 backdrop-blur-md border-b border-neutral-100">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
+
+            <flux:spacer />
+
+            <div class="flex items-center gap-2">
+                <span class="text-sm font-bold text-emerald-600">JungleNotes</span>
+            </div>
 
             <flux:spacer />
 
@@ -78,7 +87,7 @@
 
                     <flux:menu.radio.group>
                         <flux:menu.item :href="route('profile.edit')" icon="cog" wire:navigate>
-                            {{ __('Settings') }}
+                            {{ __('Ajustes') }}
                         </flux:menu.item>
                     </flux:menu.radio.group>
 
@@ -93,7 +102,7 @@
                             class="w-full cursor-pointer"
                             data-test="logout-button"
                         >
-                            {{ __('Log out') }}
+                            {{ __('Cerrar sesión') }}
                         </flux:menu.item>
                     </form>
                 </flux:menu>
