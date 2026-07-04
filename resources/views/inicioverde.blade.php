@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jungle Notes - Apuntes Universitarios</title>
 
-    <link rel="icon" type="image/png" href="{{ asset('images/favicon2.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/iconverde.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
@@ -27,8 +27,8 @@
     <nav
         class="flex justify-between items-center py-2 px-8 md:px-16 bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
         <div class="flex items-center gap-3">
-            <img src="{{ asset('images/logo2.png') }}" alt="Logo Jungle Notes"
-                class="h-20 md:h-24 w-auto object-contain scale-150">
+            <img src="{{ asset('images/logotipoverde.png') }}" alt="Logo Jungle Notes"
+                class="h-20 md:h-24 w-auto object-contain scale-120">
         </div>
 
             <div class="flex items-center gap-6">
