@@ -20,7 +20,8 @@ class ManageApuntes extends Component
 
     public string $materia_id = '';
 
-    public mixed $archivo;
+    /** @var mixed */
+    public $archivo = null;
 
     public string $search = '';
 
@@ -74,6 +75,7 @@ class ManageApuntes extends Component
     {
         $materias = Materia::all();
         $apuntes = Apunte::with(['user', 'materia'])
+            ->where('user_id', Auth::id())
             ->where(function ($q) {
                 $q->where('titulo', 'like', '%'.$this->search.'%')
                     ->orWhereHas('materia', function ($query) {

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $theme = config('app.landing_theme', 'morado');
+
     return view($theme === 'verde' ? 'inicioverde' : 'iniciomorado');
 })->name('home');
 
