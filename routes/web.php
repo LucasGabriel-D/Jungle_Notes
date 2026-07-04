@@ -6,7 +6,6 @@ use App\Http\Controllers\MateriaController;
 use App\Livewire\ManageApuntes;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'inicioverde')->name('home');
 Route::view('/', config('app.landing_theme') === 'verde' ? 'inicioverde' : 'iniciomorado')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
