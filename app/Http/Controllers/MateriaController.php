@@ -3,17 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Materia;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MateriaController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): View
     {
-        return response()->json(Materia::withCount('apuntes')->get());
+        $materias = Materia::withCount('apuntes')->get();
+
+        return view('materias.index', compact('materias'));
     }
 
-    public function store(Request $request): JsonResponse
+    public function create(): View
+    {
+        return view('materias.create');
+    }
+
+    public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'nombre' => 'required|unique:materias',
@@ -21,17 +29,26 @@ class MateriaController extends Controller
             'anio' => 'required|integer|min:1|max:5',
         ]);
 
-        $materia = Materia::create($validated);
+        Materia::create($validated);
 
-        return response()->json($materia, 201);
+        return redirect()->route('materias.index')->with('message', 'Materia creada correctamente.');
     }
 
-    public function show(Materia $materia): JsonResponse
+    public function show(Materia $materia): View
     {
-        return response()->json($materia->load('apuntes'));
+        $materia->load(['apuntes' => function ($q) {
+            $q->with('user')->latest();
+        }]);
+
+        return view('materias.show', compact('materia'));
     }
 
-    public function update(Request $request, Materia $materia): JsonResponse
+    public function edit(Materia $materia): View
+    {
+        return view('materias.edit', compact('materia'));
+    }
+
+    public function update(Request $request, Materia $materia): RedirectResponse
     {
         $validated = $request->validate([
             'nombre' => 'required|unique:materias,nombre,'.$materia->id,
@@ -41,13 +58,13 @@ class MateriaController extends Controller
 
         $materia->update($validated);
 
-        return response()->json($materia);
+        return redirect()->route('materias.index')->with('message', 'Materia actualizada correctamente.');
     }
 
-    public function destroy(Materia $materia): JsonResponse
+    public function destroy(Materia $materia): RedirectResponse
     {
         $materia->delete();
 
-        return response()->json(null, 204);
+        return redirect()->route('materias.index')->with('message', 'Materia eliminada correctamente.');
     }
 }

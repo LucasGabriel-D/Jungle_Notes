@@ -1,38 +1,31 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('partials.head')
     </head>
-    <body class="min-h-screen bg-white antialiased dark:bg-linear-to-b dark:from-neutral-950 dark:to-neutral-900">
+    <body class="min-h-screen bg-white antialiased">
         <div class="relative grid h-dvh flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
-            <div class="bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-e dark:border-neutral-800">
-                <div class="absolute inset-0 bg-neutral-900"></div>
-                <a href="{{ route('home') }}" class="relative z-20 flex items-center text-lg font-medium" wire:navigate>
-                    <span class="flex h-10 w-10 items-center justify-center rounded-md">
-                        <x-app-logo-icon class="me-2 h-7 fill-current text-white" />
-                    </span>
-                    {{ config('app.name', 'Laravel') }}
+            <div class="relative hidden h-full flex-col p-10 text-white lg:flex bg-gradient-to-br from-emerald-600 to-emerald-800">
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-600/90 to-emerald-900/90"></div>
+                <a href="{{ route('home') }}" class="relative z-20 flex items-center gap-2 text-lg font-medium" wire:navigate>
+                    <img src="{{ asset('images/iconverde.png') }}" class="h-8 w-8 object-contain" alt="Logo">
+                    <span class="font-bold">Jungle<span class="text-emerald-200">Notes</span></span>
                 </a>
-
-                @php
-                    [$message, $author] = str(Illuminate\Foundation\Inspiring::quotes()->random())->explode('-');
-                @endphp
 
                 <div class="relative z-20 mt-auto">
                     <blockquote class="space-y-2">
-                        <flux:heading size="lg">&ldquo;{{ trim($message) }}&rdquo;</flux:heading>
-                        <footer><flux:heading>{{ trim($author) }}</flux:heading></footer>
+                        <flux:heading size="lg" class="text-white/90">&ldquo;Compartí, ordená y comentá el material de estudio con tus compañeros.&rdquo;</flux:heading>
+                        <footer><flux:heading class="text-emerald-200">Equipo Iceberg — UTN FRRE</flux:heading></footer>
                     </blockquote>
                 </div>
             </div>
             <div class="w-full lg:p-8">
                 <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
                     <a href="{{ route('home') }}" class="z-20 flex flex-col items-center gap-2 font-medium lg:hidden" wire:navigate>
-                        <span class="flex h-9 w-9 items-center justify-center rounded-md">
-                            <x-app-logo-icon class="size-9 fill-current text-black dark:text-white" />
+                        <span class="flex items-center gap-2">
+                            <img src="{{ asset('images/iconverde.png') }}" class="w-9 h-9 object-contain" alt="Logo">
+                            <span class="text-lg font-bold text-emerald-600">JungleNotes</span>
                         </span>
-
-                        <span class="sr-only">{{ config('app.name', 'Laravel') }}</span>
                     </a>
                     {{ $slot }}
                 </div>
