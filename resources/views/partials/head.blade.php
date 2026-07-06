@@ -8,6 +8,11 @@
 <link rel="icon" type="image/png" href="{{ asset('images/iconverde.png') }}">
 
 @fonts
-
+<script>
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+    }
+</script>
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @fluxAppearance

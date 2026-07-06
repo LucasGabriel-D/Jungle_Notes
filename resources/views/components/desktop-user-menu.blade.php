@@ -1,3 +1,4 @@
+@auth
 <flux:dropdown position="bottom" align="start">
     <flux:sidebar.profile
         :name="auth()->user()->name"
@@ -39,3 +40,4 @@
         </flux:menu.radio.group>
     </flux:menu>
 </flux:dropdown>
+@endauth

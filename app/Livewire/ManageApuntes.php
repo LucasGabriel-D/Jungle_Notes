@@ -20,7 +20,7 @@ class ManageApuntes extends Component
 
     public string $materia_id = '';
 
-    public mixed $archivo;
+    public $archivo = null;
 
     public string $search = '';
 
@@ -72,16 +72,17 @@ class ManageApuntes extends Component
 
     public function render(): View
     {
-        $materias = Materia::all();
+        $materias = Materia::where('user_id', Auth::id())->get();
         $apuntes = Apunte::with(['user', 'materia'])
-            ->where(function ($q) {
-                $q->where('titulo', 'like', '%'.$this->search.'%')
-                    ->orWhereHas('materia', function ($query) {
-                        $query->where('nombre', 'like', '%'.$this->search.'%');
-                    });
-            })
-            ->latest()
-            ->get();
+    ->where('user_id', Auth::id())
+    ->where(function ($q) {
+        $q->where('titulo', 'like', '%'.$this->search.'%')
+            ->orWhereHas('materia', function ($query) {
+                $query->where('nombre', 'like', '%'.$this->search.'%');
+            });
+    })
+    ->latest()
+    ->get();
 
         return view('livewire.manage-apuntes', compact('materias', 'apuntes'));
     }

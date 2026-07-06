@@ -158,3 +158,60 @@ button, [role="button"], [data-flux-button] {
 [data-flux-label] {
     color: var(--color-neutral-700);
 }
+.chameleon-logo {
+    filter: invert(48%) sepia(79%) saturate(476%) hue-rotate(86deg) brightness(95%) contrast(95%);
+    transition: filter 0.7s ease;
+}
+
+.dark .chameleon-logo {
+    filter: invert(27%) sepia(89%) saturate(1200%) hue-rotate(243deg) brightness(85%) contrast(95%);
+}
+
+.chameleon-pulse {
+    animation: chameleonPulse 0.6s ease;
+}
+
+@keyframes chameleonPulse {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.2); }
+    50%  { transform: scale(0.95); }
+    75%  { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+.dark .bg-emerald-600 {
+    background-color: #7c3aed !important;
+}
+
+.dark .bg-emerald-600:hover {
+    background-color: #6d28d9 !important;
+}
+
+.dark .text-emerald-600 {
+    color: #7c3aed !important;
+}
+
+.dark .text-emerald-700 {
+    color: #7c3aed !important;
+}
+
+.dark .border-emerald-500 {
+    border-color: #7c3aed !important;
+}
+
+.dark .bg-emerald-50 {
+    background-color: #ede9fe !important;
+}
+.dark .text-neutral-900 {
+    color: #f4f4f5 !important;
+}
+
+.dark .text-neutral-800 {
+    color: #e4e4e7 !important;
+}
+.dark [data-test="sidebar-menu-button"] {
+    color: #f4f4f5 !important;
+}
+
+.dark [data-test="sidebar-menu-button"] span {
+    color: #f4f4f5 !important;
+}
