@@ -29,7 +29,7 @@
                     <flux:sidebar.item icon="document-text" :href="route('apuntes.index')" :current="request()->routeIs('apuntes.*')" wire:navigate>
                         {{ __('Bloc de Notas') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="calendar-days" href="#" :current="request()->routeIs('calendario.*')" wire:navigate>
+                    <flux:sidebar.item icon="calendar-days" href="{{ route('calendario') }}" :current="request()->routeIs('calendario*')" wire:navigate>
                         {{ __('Calendario') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
