@@ -7,9 +7,11 @@ Sistema web responsive para centralizar, buscar, descargar y comentar apuntes ac
 - **Dashboard Principal**: Panel con métricas globales (total de apuntes y materias) y actividad reciente.
 - **Gestión de Apuntes (CRUD)**: Interfaz Livewire para subir, buscar (con filtrado inteligente) y eliminar archivos.
 - **Almacenamiento Local Estructurado**: Organización automática en `storage/app/public/apuntes/materia_{id}/`.
-- **Comentarios Dinámicos**: Sistema de comentarios anidados en tiempo real integrado en el listado.
+- **Comentarios Dinámicos**: Sistema de comentarios en tiempo real integrado en el listado de apuntes.
+- **Calendario Académico**: Calendario interactivo con FullCalendar para gestionar exámenes, presentaciones y eventos.
+- **Bloc de Notas**: Editor rápido de notas personales.
+- **Materias (CRUD)**: Administración de materias con detalle de apuntes asociados.
 - **Autenticación**: Register + Login + Password Reset via Laravel Fortify.
-- **Seguridad**: 2FA, Passkeys (vía Flux Pro), actualización de perfil.
 
 ## Stack
 
@@ -17,6 +19,7 @@ Sistema web responsive para centralizar, buscar, descargar y comentar apuntes ac
 - **Frontend**: Livewire v4, Flux UI v2, Tailwind CSS v4
 - **Base de datos**: SQLite / MySQL / MariaDB
 - **Auth**: Laravel Fortify
+- **Calendario**: FullCalendar v6
 
 ## Instalación Rápida
 
@@ -55,3 +58,12 @@ Sistema web responsive para centralizar, buscar, descargar y comentar apuntes ac
 | `composer test` | Ejecuta lint + phpstan + phpunit |
 | `composer lint` | Corrige estilo con Pint |
 | `composer types:check` | PHPStan level 7 |
+
+## Equipo
+
+Proyecto desarrollado por **Equipo Iceberg** para Programación III:
+
+- Cardozo Emanuel
+- Cardozo Mauricio
+- Antonelli Lucas
+- Britez Santiago

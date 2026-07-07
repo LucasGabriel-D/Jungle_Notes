@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Apunte;
 use App\Models\Materia;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -46,8 +47,7 @@ class ManageApuntes extends Component
     {
         $this->validate();
 
-        $nombreArchivo = time().'_'.$this->archivo->getClientOriginalName();
-        $ruta = $this->archivo->storeAs('apuntes/materia_'.$this->materia_id, $nombreArchivo, 'public');
+        $ruta = $this->archivo->storeAs('apuntes/materia_'.$this->materia_id, $this->archivo->hashName(), 'public');
 
         Apunte::create([
             'user_id' => Auth::id(),
@@ -64,16 +64,19 @@ class ManageApuntes extends Component
     public function delete(int $id): void
     {
         $apunte = Apunte::findOrFail($id);
-        if ($apunte->user_id === Auth::id()) {
-            Storage::disk('public')->delete($apunte->ruta_archivo);
-            $apunte->delete();
-            session()->flash('message', 'Apunte eliminado.');
+        if ($apunte->user_id !== Auth::id()) {
+            session()->flash('error', 'No tienes permiso para eliminar este apunte.');
+
+            return;
         }
+        Storage::disk('public')->delete($apunte->ruta_archivo);
+        $apunte->delete();
+        session()->flash('message', 'Apunte eliminado.');
     }
 
     public function render(): View
     {
-        $materias = Materia::where('user_id', Auth::id())->get();
+        $materias = Cache::remember('materias_'.Auth::id(), 3600, fn () => Materia::where('user_id', Auth::id())->get());
         $apuntes = Apunte::with(['user', 'materia'])
             ->where('user_id', Auth::id())
             ->where(function ($q) {
