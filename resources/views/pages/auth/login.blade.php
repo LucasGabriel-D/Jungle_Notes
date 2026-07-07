@@ -111,9 +111,7 @@
             <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-emerald-300/20 dark:bg-violet-500/10 rounded-full blur-3xl"></div>
 
             <div class="max-w-md text-center z-10">
-                <span class="inline-block px-3 py-1 bg-white dark:bg-zinc-800 border border-emerald-200/60 dark:border-zinc-600 rounded-full text-xs font-semibold text-emerald-700 dark:text-emerald-400 mb-4 shadow-sm">
-                    🌿 El espacio ideal para estudiantes
-                </span>
+               
                 <h2 class="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 mb-4">
                     Tus apuntes universitarios, <span class="text-emerald-600">organizados en un solo lugar.</span>
                 </h2>
