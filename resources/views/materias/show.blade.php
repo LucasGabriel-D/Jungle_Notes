@@ -40,22 +40,25 @@
                 @forelse($materia->apuntes as $apunte)
                     <div class="px-6 py-4 flex items-center justify-between group">
                         <div class="flex items-center gap-3 min-w-0">
-                            <div class="p-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-lg shrink-0">
+                            <div class="p-2 bg-emerald-50 dark:bg-violet-900/30 text-emerald-700 dark:text-violet-400 rounded-lg shrink-0">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                             </div>
                             <div class="min-w-0">
                                 <h4 class="font-semibold text-sm text-neutral-900 dark:text-neutral-100 truncate">{{ $apunte->titulo }}</h4>
-                                <p class="text-xs text-neutral-500 dark:text-neutral-400">por {{ $apunte->user->name }} · {{ $apunte->created_at->diffForHumans() }}</p>
+@if($apunte->descripcion)
+    <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">{{ $apunte->descripcion }}</p>
+@endif
+<p class="text-xs text-neutral-500 dark:text-neutral-400">por {{ $apunte->user->name }} · {{ $apunte->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
-                        <a href="{{ asset('storage/' . $apunte->ruta_archivo) }}" target="_blank" class="text-xs bg-emerald-50 dark:bg-emerald-900/30 hover:bg-emerald-600 text-emerald-700 dark:text-emerald-400 hover:text-white px-3 py-2 rounded-lg font-semibold transition-all duration-150 shrink-0">
+                        <a href="{{ asset('storage/' . $apunte->ruta_archivo) }}" target="_blank" class="text-xs bg-emerald-50 dark:bg-violet-900/30 hover:bg-emerald-600 text-emerald-700 dark:text-violet-400 hover:text-white px-3 py-2 rounded-lg font-semibold transition-all duration-150 shrink-0">
                             Abrir
                         </a>
                     </div>
                 @empty
                     <div class="px-6 py-8 text-center">
                         <p class="text-neutral-500 dark:text-neutral-400">No hay apuntes para esta materia todavía.</p>
-                        <a href="{{ route('apuntes.index') }}" class="inline-block mt-3 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 transition-colors">Subir apunte</a>
+                        <a href="{{ route('apuntes.index') }}" class="inline-block mt-3 text-sm font-semibold text-emerald-600 dark:text-violet-400 hover:text-emerald-700 transition-colors">Subir apunte</a>
                     </div>
                 @endforelse
             </div>

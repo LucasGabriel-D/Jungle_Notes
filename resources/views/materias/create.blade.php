@@ -13,19 +13,19 @@
 
                 <div>
                     <label class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Nombre</label>
-                    <input type="text" name="nombre" value="{{ old('nombre') }}" class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:outline-none transition duration-150" required>
+                    <input type="text" name="nombre" value="{{ old('nombre') }}" class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 dark:focus:border-violet-500 focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-violet-500/10 focus:outline-none transition duration-150" required>
                     @error('nombre') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Descripción</label>
-                    <textarea name="descripcion" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:outline-none transition duration-150">{{ old('descripcion') }}</textarea>
+                    <textarea name="descripcion" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 dark:focus:border-violet-500 focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-violet-500/10 focus:outline-none transition duration-150">{{ old('descripcion') }}</textarea>
                     @error('descripcion') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">Año</label>
-                    <select name="anio" class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:outline-none transition duration-150" required>
+                    <select name="anio" class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 dark:focus:border-violet-500 focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-violet-500/10 focus:outline-none transition duration-150" required>
                         <option value="">Seleccionar año</option>
                         @foreach (range(1, 5) as $anio)
                             <option value="{{ $anio }}" {{ old('anio') == $anio ? 'selected' : '' }}>{{ $anio }}°</option>
@@ -34,7 +34,7 @@
                     @error('anio') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
 
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow-sm transition-all duration-150 cursor-pointer">
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 dark:bg-violet-600 dark:hover:bg-violet-700 text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow-sm transition-all duration-150 cursor-pointer">
                     Crear Materia
                 </button>
             </form>

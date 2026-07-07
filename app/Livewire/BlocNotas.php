@@ -77,7 +77,7 @@ class BlocNotas extends Component
     public function render(): View
     {
         $notasDelDia = Nota::where('user_id', Auth::id())
-            ->where('fecha', $this->fechaSeleccionada)
+            ->whereDate('fecha', $this->fechaSeleccionada)
             ->latest()
             ->get();
 

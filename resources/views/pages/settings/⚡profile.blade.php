@@ -67,7 +67,7 @@ new #[Title('Configuración de Perfil')] class extends Component {
     <x-pages::settings.layout heading="Perfil" subheading="Actualizá tu nombre y correo electrónico">
 
         @if (session('status') === 'profile-updated')
-            <div class="bg-emerald-100 dark:bg-emerald-900/30 border-l-4 border-emerald-500 text-emerald-700 dark:text-emerald-400 p-4 mb-4 rounded-lg">
+            <div class="bg-emerald-100 dark:bg-violet-900/30 border-l-4 border-emerald-500 text-emerald-700 dark:text-violet-400 p-4 mb-4 rounded-lg">
                 Perfil actualizado correctamente.
             </div>
         @endif
@@ -102,13 +102,13 @@ new #[Title('Configuración de Perfil')] class extends Component {
                     <div class="mt-3">
                         <p class="text-sm text-neutral-600 dark:text-neutral-400">
                             Tu correo electrónico no está verificado.
-                            <button type="button" wire:click.prevent="resendVerificationNotification" class="text-emerald-600 dark:text-emerald-400 hover:underline font-semibold">
+                            <button type="button" wire:click.prevent="resendVerificationNotification" class="text-emerald-600 dark:text-violet-400 hover:underline font-semibold">
                                 Hacé clic acá para reenviar el correo de verificación.
                             </button>
                         </p>
 
                         @if (session('status') === 'verification-link-sent')
-                            <p class="mt-2 text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                            <p class="mt-2 text-sm font-medium text-emerald-600 dark:text-violet-400">
                                 Se envió un nuevo enlace de verificación a tu correo electrónico.
                             </p>
                         @endif

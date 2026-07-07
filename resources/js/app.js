@@ -8,10 +8,8 @@ function applyTheme() {
     }
 }
 
-// Aplicar al cargar la página
 applyTheme();
 
-// Aplicar después de cada navegación de Livewire
 document.addEventListener('livewire:navigated', applyTheme);
 
 window.toggleDarkMode = function () {
@@ -21,7 +19,7 @@ window.toggleDarkMode = function () {
     const logo = document.querySelector('.chameleon-logo');
     if (logo) {
         logo.classList.remove('chameleon-pulse');
-        void logo.offsetWidth; // fuerza el reflow para reiniciar la animación
+        void logo.offsetWidth;
         logo.classList.add('chameleon-pulse');
         logo.addEventListener('animationend', () => {
             logo.classList.remove('chameleon-pulse');

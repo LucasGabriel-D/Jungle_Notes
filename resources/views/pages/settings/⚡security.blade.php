@@ -40,7 +40,7 @@ new #[Title('Seguridad')] class extends Component {
     <x-pages::settings.layout heading="Actualizar contraseña" subheading="Asegurate de usar una contraseña larga y aleatoria para mantener tu cuenta segura">
 
         @if (session('status') === 'password-updated')
-            <div class="bg-emerald-100 dark:bg-emerald-900/30 border-l-4 border-emerald-500 text-emerald-700 dark:text-emerald-400 p-4 mb-4 rounded-lg">
+            <div class="bg-emerald-100 dark:bg-violet-900/30 border-l-4 border-emerald-500 text-emerald-700 dark:text-violet-400 p-4 mb-4 rounded-lg">
                 Contraseña actualizada correctamente.
             </div>
         @endif

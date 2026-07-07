@@ -9,22 +9,22 @@
         </div>
 
         @if (session('message'))
-            <div class="bg-emerald-100 dark:bg-emerald-900/30 border-l-4 border-emerald-500 text-emerald-700 dark:text-emerald-400 p-4 mb-4 rounded-lg" role="alert">
+            <div class="bg-emerald-100 dark:bg-violet-900/30 border-l-4 border-emerald-500 text-emerald-700 dark:text-violet-400 p-4 mb-4 rounded-lg" role="alert">
                 {{ session('message') }}
             </div>
         @endif
 
         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             @forelse($materias as $materia)
-                <a href="{{ route('materias.show', $materia) }}" class="block bg-white dark:bg-zinc-800 p-5 rounded-xl border border-neutral-200 dark:border-zinc-700 shadow-sm hover:shadow-md hover:border-emerald-200 dark:hover:border-emerald-700 transition-all duration-150 group no-underline">
+                <a href="{{ route('materias.show', $materia) }}" class="block bg-white dark:bg-zinc-800 p-5 rounded-xl border border-neutral-200 dark:border-zinc-700 shadow-sm hover:shadow-md hover:border-emerald-200 dark:hover:border-violet-700 transition-all duration-150 group no-underline">
                     <div class="flex items-start justify-between mb-3">
-                        <h3 class="font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">{{ $materia->nombre }}</h3>
+                        <h3 class="font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-emerald-700 dark:group-hover:text-violet-400 transition-colors">{{ $materia->nombre }}</h3>
                         <span class="text-xs font-semibold text-neutral-400 dark:text-neutral-500 bg-neutral-100 dark:bg-zinc-700 px-2 py-0.5 rounded-full">{{ $materia->anio }}° año</span>
                     </div>
                     @if ($materia->descripcion)
                         <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-3 line-clamp-2">{{ $materia->descripcion }}</p>
                     @endif
-                    <div class="flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+                    <div class="flex items-center gap-1.5 text-xs text-emerald-600 dark:text-violet-400 font-semibold">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                         {{ $materia->apuntes_count }} apunte{{ $materia->apuntes_count !== 1 ? 's' : '' }}
                     </div>
