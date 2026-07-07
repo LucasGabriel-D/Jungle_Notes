@@ -47,13 +47,7 @@
             </flux:sidebar.nav>
 
             <x-desktop-user-menu class="hidden lg:block" />
-            <flux:sidebar.item 
-              icon="moon" 
-              onclick="toggleDarkMode()" 
-                 class="cursor-pointer"
->       
-              {{ __('Modo Oscuro') }}
-            </flux:sidebar.item>
+            
                   </flux:sidebar>
 
         <!-- Mobile Header with User Menu -->
