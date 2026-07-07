@@ -68,7 +68,7 @@
                 </thead>
                 <tbody class="divide-y divide-neutral-100 dark:divide-zinc-700">
                     @foreach($apuntes as $apunte)
-                        <tr class="hover:bg-emerald-50/40 dark:hover:bg-emerald-900/20 transition">
+    <tr class="hover:bg-emerald-50/40 dark:hover:bg-emerald-900/20 transition" id="apunte-{{ $apunte->id }}">
                             <td class="px-4 py-3 text-sm font-medium text-neutral-900 dark:text-neutral-100">{{ $apunte->titulo }}</td>
                             <td class="px-4 py-3 text-sm text-neutral-600 dark:text-neutral-400"><span class="bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded-full text-xs font-semibold">{{ $apunte->materia->nombre }}</span></td>
                             <td class="px-4 py-3 text-sm text-neutral-500 dark:text-neutral-400">{{ $apunte->user->name }}</td>

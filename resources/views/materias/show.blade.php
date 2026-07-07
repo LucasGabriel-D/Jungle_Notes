@@ -45,7 +45,10 @@
                             </div>
                             <div class="min-w-0">
                                 <h4 class="font-semibold text-sm text-neutral-900 dark:text-neutral-100 truncate">{{ $apunte->titulo }}</h4>
-                                <p class="text-xs text-neutral-500 dark:text-neutral-400">por {{ $apunte->user->name }} · {{ $apunte->created_at->diffForHumans() }}</p>
+@if($apunte->descripcion)
+    <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">{{ $apunte->descripcion }}</p>
+@endif
+<p class="text-xs text-neutral-500 dark:text-neutral-400">por {{ $apunte->user->name }} · {{ $apunte->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
                         <a href="{{ asset('storage/' . $apunte->ruta_archivo) }}" target="_blank" class="text-xs bg-emerald-50 dark:bg-emerald-900/30 hover:bg-emerald-600 text-emerald-700 dark:text-emerald-400 hover:text-white px-3 py-2 rounded-lg font-semibold transition-all duration-150 shrink-0">

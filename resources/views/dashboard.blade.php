@@ -75,7 +75,9 @@
                         @forelse($misComentarios as $comentario)
                             <div class="p-3.5 bg-emerald-50/40 dark:bg-emerald-900/20 rounded-xl border border-emerald-100/70 dark:border-emerald-800/50">
                                 <p class="text-xs italic text-neutral-700 dark:text-neutral-300">"{{ $comentario->contenido }}"</p>
-                                <span class="block text-[10px] text-emerald-600 mt-2 font-semibold uppercase tracking-wider">Doc: {{ $comentario->apunte->titulo }}</span>
+                               <a href="{{ route('apuntes.index') }}#apunte-{{ $comentario->apunte_id }}" wire:navigate class="block text-[10px] text-emerald-600 dark:text-emerald-400 mt-2 font-semibold uppercase tracking-wider hover:underline">
+    Doc: {{ $comentario->apunte->titulo }}
+</a>
                             </div>
                         @empty
                             <p class="text-sm text-neutral-500 dark:text-neutral-400 py-4">Sin comentarios recientes.</p>
