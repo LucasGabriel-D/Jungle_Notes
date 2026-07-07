@@ -23,7 +23,7 @@ class ApunteController extends Controller
 
         $path = $request->file('archivo')->storeAs(
             'apuntes/materia_'.$request->materia_id,
-            time().'_'.$request->file('archivo')->getClientOriginalName(),
+            $request->file('archivo')->hashName(),
             'public'
         );
 

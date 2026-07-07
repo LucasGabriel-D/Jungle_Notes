@@ -47,8 +47,7 @@ class ManageApuntes extends Component
     {
         $this->validate();
 
-        $nombreArchivo = time().'_'.$this->archivo->getClientOriginalName();
-        $ruta = $this->archivo->storeAs('apuntes/materia_'.$this->materia_id, $nombreArchivo, 'public');
+        $ruta = $this->archivo->storeAs('apuntes/materia_'.$this->materia_id, $this->archivo->hashName(), 'public');
 
         Apunte::create([
             'user_id' => Auth::id(),
