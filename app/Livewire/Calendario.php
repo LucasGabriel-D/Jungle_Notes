@@ -113,7 +113,8 @@ class Calendario extends Component
         ], $feriados);
     }
 
-    public function getEventosJson(): string
+    /** @return array<int, array<string, mixed>> */
+    public function getEventos(): array
     {
         $eventos = Evento::where('user_id', Auth::id())
             ->get()
@@ -127,7 +128,7 @@ class Calendario extends Component
             ])
             ->toArray();
 
-        return json_encode(array_merge($eventos, $this->getFeriados())) ?: '[]';
+        return array_merge($eventos, $this->getFeriados());
     }
 
     public function render(): View

@@ -18,7 +18,7 @@
     </div>
 
     <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-        <div id="calendar"></div>
+        <div id="calendar" class="min-h-[400px]"></div>
     </div>
 
     @if($mostrarModal)
@@ -86,38 +86,43 @@
 
     @script
     <script>
-        document.addEventListener('livewire:init', () => {
-            const calendarEl = document.getElementById('calendar');
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'es',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                events: @js(json_decode($this->getEventosJson())),
-                dateClick: function(info) {
-                    $wire.abrirModal(info.dateStr);
-                },
-                eventClick: function(info) {
-                    if (info.event.extendedProps.tipo !== 'feriado') {
-                        $wire.abrirEditar(info.event.id);
-                    }
-                },
-                eventDisplay: 'block',
-                dayMaxEvents: 3,
-            });
-            calendar.render();
+        const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+            initialView: 'dayGridMonth',
+            locale: 'es',
+            contentHeight: 'auto',
+            aspectRatio: 1.8,
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            buttonText: {
+                today: 'Hoy',
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+            },
+            events: @js($this->getEventos()),
+            dateClick: function(info) {
+                $wire.abrirModal(info.dateStr);
+            },
+            eventClick: function(info) {
+                if (info.event.extendedProps.tipo !== 'feriado') {
+                    $wire.abrirEditar(info.event.id);
+                }
+            },
+            eventDisplay: 'block',
+            dayMaxEvents: 3,
+        });
+        calendar.render();
 
-            Livewire.on('eventosActualizados', () => {
-                fetch('/api/calendario/eventos')
-                    .then(r => r.json())
-                    .then(events => {
-                        calendar.removeAllEvents();
-                        calendar.addEventSource(events);
-                    });
-            });
+        Livewire.on('eventosActualizados', () => {
+            fetch('/api/calendario/eventos')
+                .then(r => r.json())
+                .then(events => {
+                    calendar.removeAllEvents();
+                    calendar.addEventSource(events);
+                });
         });
     </script>
     @endscript
