@@ -4,8 +4,8 @@ namespace App\Livewire;
 
 use App\Models\Evento;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Illuminate\View\View;
+use Livewire\Component;
 
 class Calendario extends Component
 {
