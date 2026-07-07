@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Apunte;
 use App\Models\Materia;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -76,7 +77,7 @@ class ManageApuntes extends Component
 
     public function render(): View
     {
-        $materias = Materia::where('user_id', Auth::id())->get();
+        $materias = Cache::remember('materias_'.Auth::id(), 3600, fn () => Materia::where('user_id', Auth::id())->get());
         $apuntes = Apunte::with(['user', 'materia'])
             ->where('user_id', Auth::id())
             ->where(function ($q) {
