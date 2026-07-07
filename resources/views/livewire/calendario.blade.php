@@ -1,4 +1,8 @@
 <div class="flex flex-col gap-4 p-4 text-neutral-800 antialiased" x-data>
+    @if (session()->has('error'))
+        <div class="text-red-600 text-sm font-medium">{{ session('error') }}</div>
+    @endif
+
     @if (session()->has('message'))
         <div class="text-emerald-600 text-sm font-medium">{{ session('message') }}</div>
     @endif

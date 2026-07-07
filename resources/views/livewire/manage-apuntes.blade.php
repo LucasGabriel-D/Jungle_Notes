@@ -1,6 +1,12 @@
 <div class="p-6 max-w-4xl mx-auto">
     <h2 class="text-2xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Gestionar Apuntes</h2>
 
+    @if (session()->has('error'))
+        <div class="bg-red-100 dark:bg-red-900/30 border-l-4 border-red-500 text-red-700 dark:text-red-400 p-4 mb-4 rounded-lg" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
+
     @if (session()->has('message'))
         <div class="bg-emerald-100 dark:bg-emerald-900/30 border-l-4 border-emerald-500 text-emerald-700 dark:text-emerald-400 p-4 mb-4 rounded-lg" role="alert">
             {{ session('message') }}
