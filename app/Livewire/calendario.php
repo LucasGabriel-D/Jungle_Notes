@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Models\Nota;
 use App\Models\Apunte;
+use App\Models\Nota;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -11,7 +11,9 @@ use Livewire\Component;
 class Calendario extends Component
 {
     public int $mesActual;
+
     public int $anioActual;
+
     public string $fechaSeleccionada = '';
 
     public function mount(): void
@@ -52,14 +54,14 @@ class Calendario extends Component
             ->whereYear('fecha', $this->anioActual)
             ->whereMonth('fecha', $this->mesActual)
             ->get()
-            ->groupBy(fn($n) => $n->fecha->format('Y-m-d'));
+            ->groupBy(fn ($n) => $n->fecha->format('Y-m-d'));
 
         $apuntes = Apunte::with('materia')
             ->where('user_id', Auth::id())
             ->whereYear('created_at', $this->anioActual)
             ->whereMonth('created_at', $this->mesActual)
             ->get()
-            ->groupBy(fn($a) => $a->created_at->format('Y-m-d'));
+            ->groupBy(fn ($a) => $a->created_at->format('Y-m-d'));
 
         $eventosDelDia = [
             'notas' => Nota::where('user_id', Auth::id())
