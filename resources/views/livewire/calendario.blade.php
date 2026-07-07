@@ -18,7 +18,7 @@
     </div>
 
     <div class="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
-        <div id="calendar" class="min-h-[300px]"></div>
+        <div id="calendar" class="min-h-[300px]" wire:ignore></div>
     </div>
 
     @if($mostrarModal)
@@ -117,7 +117,7 @@
         calendar.render();
 
         Livewire.on('eventosActualizados', () => {
-            fetch('/api/calendario/eventos')
+            fetch('{{ route('calendario.eventos') }}')
                 .then(r => r.json())
                 .then(events => {
                     calendar.removeAllEvents();
