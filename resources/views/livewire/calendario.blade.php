@@ -111,7 +111,7 @@
             calendar.render();
 
             Livewire.on('eventosActualizados', () => {
-                fetch('/api/calendario/eventos')
+                fetch('{{ route('calendario.eventos') }}')
                     .then(r => r.json())
                     .then(events => {
                         calendar.removeAllEvents();
