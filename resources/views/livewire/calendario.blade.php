@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-6 p-6 text-neutral-800 antialiased">
+<div class="flex flex-col gap-4 p-4 text-neutral-800 antialiased">
     <div class="flex items-center justify-between">
         <h2 class="text-xl font-bold text-neutral-900 flex items-center gap-2">
             <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -17,8 +17,8 @@
         </button>
     </div>
 
-    <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-        <div id="calendar" class="min-h-[400px]"></div>
+    <div class="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm">
+        <div id="calendar" class="min-h-[300px]"></div>
     </div>
 
     @if($mostrarModal)
@@ -90,7 +90,7 @@
             initialView: 'dayGridMonth',
             locale: 'es',
             contentHeight: 'auto',
-            aspectRatio: 1.8,
+            aspectRatio: 2.2,
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
