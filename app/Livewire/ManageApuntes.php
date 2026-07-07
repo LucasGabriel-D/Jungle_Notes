@@ -73,7 +73,7 @@ class ManageApuntes extends Component
 
     public function render(): View
     {
-        $materias = Materia::all();
+        $materias = Materia::where('user_id', Auth::id())->get();
         $apuntes = Apunte::with(['user', 'materia'])
             ->where('user_id', Auth::id())
             ->where(function ($q) {
