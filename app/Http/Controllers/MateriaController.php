@@ -6,6 +6,7 @@ use App\Models\Materia;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class MateriaController extends Controller
@@ -75,6 +76,10 @@ class MateriaController extends Controller
     {
         abort_if($materia->user_id !== Auth::id(), 403);
 
+        foreach ($materia->apuntes as $apunte) {
+            Storage::disk('public')->delete($apunte->ruta_archivo);
+        }
+        Storage::disk('public')->deleteDirectory('apuntes/materia_'.$materia->id);
         $materia->delete();
 
         return redirect()->route('materias.index')->with('message', 'Materia eliminada correctamente.');
