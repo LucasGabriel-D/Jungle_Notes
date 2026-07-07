@@ -1,127 +1,124 @@
-<div class="p-6 max-w-5xl mx-auto">
-    <h2 class="text-2xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Calendario</h2>
+<div class="flex flex-col gap-6 p-6 text-neutral-800 antialiased">
+    <div class="flex items-center justify-between">
+        <h2 class="text-xl font-bold text-neutral-900 flex items-center gap-2">
+            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Calendario Académico
+        </h2>
+        <button
+            wire:click="abrirModal"
+            class="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-sm transition-all duration-150"
+        >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            Nuevo Evento
+        </button>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+        <div id="calendar"></div>
+    </div>
 
-        <!-- Calendario -->
-        <div class="bg-white dark:bg-zinc-800 rounded-xl border border-neutral-200 dark:border-zinc-700 shadow-sm p-5">
+    @if($mostrarModal)
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" wire:click.self="mostrarModal = false">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6" @click.outside="$wire.set('mostrarModal', false)">
+            <h3 class="text-lg font-bold text-neutral-900 mb-4">{{ $editando ? 'Editar Evento' : 'Nuevo Evento' }}</h3>
 
-            <!-- Header -->
-            <div class="flex items-center justify-between mb-4">
-                <button wire:click="mesAnterior" class="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-zinc-700 transition text-neutral-600 dark:text-neutral-400">
-                    ←
-                </button>
-                <h3 class="text-sm font-bold text-neutral-800 dark:text-neutral-100 capitalize">
-                    {{ \Carbon\Carbon::create($anioActual, $mesActual, 1)->locale('es')->isoFormat('MMMM YYYY') }}
-                </h3>
-                <button wire:click="mesSiguiente" class="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-zinc-700 transition text-neutral-600 dark:text-neutral-400">
-                    →
-                </button>
-            </div>
-
-            <!-- Días de la semana -->
-            <div class="grid grid-cols-7 mb-2">
-                @foreach(['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'] as $dia)
-                    <div class="text-center text-xs font-semibold text-neutral-400 dark:text-neutral-500 py-1">{{ $dia }}</div>
-                @endforeach
-            </div>
-
-            <!-- Días del mes -->
-            @php
-                $primerDia = \Carbon\Carbon::create($anioActual, $mesActual, 1);
-                $diasEnMes = $primerDia->daysInMonth;
-                $inicioDeSemana = $primerDia->dayOfWeekIso - 1;
-            @endphp
-
-            <div class="grid grid-cols-7 gap-1">
-                @for ($i = 0; $i < $inicioDeSemana; $i++)
-                    <div></div>
-                @endfor
-
-                @for ($dia = 1; $dia <= $diasEnMes; $dia++)
-                    @php
-                        $fecha = \Carbon\Carbon::create($anioActual, $mesActual, $dia)->toDateString();
-                        $esHoy = $fecha === now()->toDateString();
-                        $esSeleccionado = $fecha === $fechaSeleccionada;
-                        $tieneNotas = isset($notas[$fecha]);
-                        $tieneApuntes = isset($apuntes[$fecha]);
-                    @endphp
-                    <button
-                        wire:click="seleccionarFecha('{{ $fecha }}')"
-                        class="relative flex flex-col items-center justify-center h-10 w-full rounded-lg text-sm font-medium transition-all duration-150
-                            {{ $esSeleccionado ? 'bg-emerald-600 text-white' : ($esHoy ? 'border-2 border-emerald-500 text-emerald-700 dark:text-emerald-400' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-zinc-700') }}"
-                    >
-                        {{ $dia }}
-                        <div class="flex gap-0.5 mt-0.5">
-                            @if ($tieneNotas)
-                                <span class="w-1 h-1 rounded-full bg-emerald-400"></span>
-                            @endif
-                            @if ($tieneApuntes)
-                                <span class="w-1 h-1 rounded-full bg-blue-400"></span>
-                            @endif
-                        </div>
-                    </button>
-                @endfor
-            </div>
-
-            <!-- Leyenda -->
-            <div class="flex items-center gap-4 mt-4 pt-4 border-t border-neutral-100 dark:border-zinc-700">
-                <div class="flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-400">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    Notas
+            <form wire:submit="guardar" class="flex flex-col gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-neutral-700 mb-1">Título</label>
+                    <input type="text" wire:model="titulo" class="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-emerald-500" placeholder="Ej: Parcial de Matemática">
+                    @error('titulo') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
                 </div>
-                <div class="flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-400">
-                    <span class="w-2 h-2 rounded-full bg-blue-400"></span>
-                    Apuntes
+
+                <div>
+                    <label class="block text-sm font-medium text-neutral-700 mb-1">Tipo</label>
+                    <select wire:model="tipo" class="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-emerald-500">
+                        <option value="examen">Examen</option>
+                        <option value="presentacion">Presentación</option>
+                        <option value="otro">Otro</option>
+                    </select>
                 </div>
-            </div>
-        </div>
 
-        <!-- Panel de eventos del día -->
-        <div class="flex flex-col gap-4">
-            <div class="bg-white dark:bg-zinc-800 rounded-xl border border-neutral-200 dark:border-zinc-700 shadow-sm p-5">
-                <h3 class="text-sm font-bold text-neutral-700 dark:text-neutral-300 mb-4">
-                     {{ \Carbon\Carbon::parse($fechaSeleccionada)->locale('es')->isoFormat('dddd, D [de] MMMM [de] YYYY') }}
-                </h3>
-
-                <!-- Notas del día -->
-                @if(count($eventosDelDia['notas'] ?? []) > 0)
-                    <div class="mb-4">
-                        <h4 class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-2">📝 Notas</h4>
-                        <div class="flex flex-col gap-2">
-                            @foreach($eventosDelDia['notas'] as $nota)
-                                <div class="p-3 bg-emerald-50/40 dark:bg-emerald-900/20 rounded-xl border border-emerald-100 dark:border-emerald-800/50">
-                                    <p class="text-sm text-neutral-700 dark:text-neutral-300">{{ $nota->contenido }}</p>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-
-                <!-- Apuntes del día -->
-                @if(count($eventosDelDia['apuntes'] ?? []) > 0)
+                <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <h4 class="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2">📄 Apuntes subidos</h4>
-                        <div class="flex flex-col gap-2">
-                            @foreach($eventosDelDia['apuntes'] as $apunte)
-                                <div class="p-3 bg-blue-50/40 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800/50 flex items-center justify-between">
-                                    <div>
-                                        <p class="text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ $apunte->titulo }}</p>
-                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">{{ $apunte->materia->nombre }}</p>
-                                    </div>
-                                    <a href="{{ asset('storage/' . $apunte->ruta_archivo) }}" target="_blank" class="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded-lg font-semibold border border-blue-100 dark:border-blue-800">
-                                        Abrir
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
+                        <label class="block text-sm font-medium text-neutral-700 mb-1">Fecha Inicio</label>
+                        <input type="datetime-local" wire:model="fechaInicio" class="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-emerald-500">
+                        @error('fechaInicio') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
                     </div>
-                @endif
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-700 mb-1">Fecha Fin (opcional)</label>
+                        <input type="datetime-local" wire:model="fechaFin" class="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-emerald-500">
+                    </div>
+                </div>
 
-                @if(count($eventosDelDia['notas'] ?? []) === 0 && count($eventosDelDia['apuntes'] ?? []) === 0)
-                    <p class="text-sm text-neutral-400 dark:text-neutral-500">No hay eventos para este día.</p>
-                @endif
-            </div>
+                <div>
+                    <label class="block text-sm font-medium text-neutral-700 mb-1">Color</label>
+                    <div class="flex gap-2">
+                        @foreach(['#10b981' => 'Verde', '#ef4444' => 'Rojo', '#3b82f6' => 'Azul', '#f59e0b' => 'Amarillo', '#8b5cf6' => 'Violeta'] as $hex => $label)
+                            <button type="button" wire:click="$set('color', '{{ $hex }}')"
+                                class="w-8 h-8 rounded-full border-2 transition-all {{ $color === $hex ? 'border-neutral-900 scale-110' : 'border-transparent' }}"
+                                style="background-color: {{ $hex }}" title="{{ $label }}"></button>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-2 mt-2">
+                    <button type="button" wire:click="$set('mostrarModal', false)" class="px-4 py-2 text-sm font-medium text-neutral-700 bg-neutral-100 hover:bg-neutral-200 rounded-lg transition-colors">
+                        Cancelar
+                    </button>
+                    @if($editando)
+                    <button type="button" wire:click="eliminar({{ $eventoId }})" wire:confirm="¿Eliminar este evento?"
+                        class="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors">
+                        Eliminar
+                    </button>
+                    @endif
+                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors">
+                        {{ $editando ? 'Actualizar' : 'Guardar' }}
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+    @endif
+
+    @script
+    <script>
+        document.addEventListener('livewire:init', () => {
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: @js(json_decode($this->getEventosJson())),
+                dateClick: function(info) {
+                    $wire.abrirModal(info.dateStr);
+                },
+                eventClick: function(info) {
+                    if (info.event.extendedProps.tipo !== 'feriado') {
+                        $wire.abrirEditar(info.event.id);
+                    }
+                },
+                eventDisplay: 'block',
+                dayMaxEvents: 3,
+            });
+            calendar.render();
+
+            Livewire.on('eventosActualizados', () => {
+                fetch('{{ route('calendario.eventos') }}')
+                    .then(r => r.json())
+                    .then(events => {
+                        calendar.removeAllEvents();
+                        calendar.addEventSource(events);
+                    });
+            });
+        });
+    </script>
+    @endscript
 </div>
