@@ -98,6 +98,8 @@ class Calendario extends Component
         }
         $evento = Evento::findOrFail($this->eventoId);
         if ($evento->user_id !== Auth::id()) {
+            session()->flash('error', 'No tienes permiso para eliminar este evento.');
+
             return;
         }
         $evento->delete();

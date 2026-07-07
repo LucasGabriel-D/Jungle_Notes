@@ -64,11 +64,14 @@ class ManageApuntes extends Component
     public function delete(int $id): void
     {
         $apunte = Apunte::findOrFail($id);
-        if ($apunte->user_id === Auth::id()) {
-            Storage::disk('public')->delete($apunte->ruta_archivo);
-            $apunte->delete();
-            session()->flash('message', 'Apunte eliminado.');
+        if ($apunte->user_id !== Auth::id()) {
+            session()->flash('error', 'No tienes permiso para eliminar este apunte.');
+
+            return;
         }
+        Storage::disk('public')->delete($apunte->ruta_archivo);
+        $apunte->delete();
+        session()->flash('message', 'Apunte eliminado.');
     }
 
     public function render(): View
