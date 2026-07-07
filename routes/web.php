@@ -28,8 +28,8 @@ Route::middleware(['auth'])->group(function () {
             ->map(fn ($e) => [
                 'id' => $e->id,
                 'title' => $e->titulo,
-                'start' => $e->fecha_inicio->toIso8601String(),
-                'end' => $e->fecha_fin?->toIso8601String(),
+                'start' => $e->fecha_inicio->format('Y-m-d'),
+                'end' => $e->fecha_fin?->format('Y-m-d'),
                 'color' => $e->color ?? '#10b981',
                 'extendedProps' => ['tipo' => $e->tipo],
             ]);

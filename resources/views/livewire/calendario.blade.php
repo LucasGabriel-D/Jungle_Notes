@@ -1,4 +1,8 @@
-<div class="flex flex-col gap-4 p-4 text-neutral-800 antialiased">
+<div class="flex flex-col gap-4 p-4 text-neutral-800 antialiased" x-data>
+    @if (session()->has('message'))
+        <div class="text-emerald-600 text-sm font-medium">{{ session('message') }}</div>
+    @endif
+
     <div class="flex items-center justify-between">
         <h2 class="text-xl font-bold text-neutral-900 flex items-center gap-2">
             <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,13 +48,13 @@
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-neutral-700 mb-1">Fecha Inicio</label>
-                        <input type="datetime-local" wire:model="fechaInicio" class="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-emerald-500">
+                        <label class="block text-sm font-medium text-neutral-700 mb-1">Fecha</label>
+                        <input type="date" wire:model="fechaInicio" class="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-emerald-500">
                         @error('fechaInicio') <span class="text-xs text-red-500 mt-1">{{ $message }}</span> @enderror
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-neutral-700 mb-1">Fecha Fin (opcional)</label>
-                        <input type="datetime-local" wire:model="fechaFin" class="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-emerald-500">
+                        <input type="date" wire:model="fechaFin" class="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-emerald-500">
                     </div>
                 </div>
 
@@ -70,7 +74,7 @@
                         Cancelar
                     </button>
                     @if($editando)
-                    <button type="button" wire:click="eliminar({{ $eventoId }})" wire:confirm="¿Eliminar este evento?"
+                    <button type="button" wire:click="$set('confirmando', true)"
                         class="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors">
                         Eliminar
                     </button>
@@ -80,6 +84,18 @@
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+    @endif
+
+    @if($confirmando)
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-sm p-6">
+            <p class="text-neutral-800 font-medium mb-4">¿Eliminar este evento?</p>
+            <div class="flex justify-end gap-2">
+                <button wire:click="$set('confirmando', false)" class="px-4 py-2 text-sm font-medium rounded-lg bg-neutral-100 hover:bg-neutral-200 transition-colors">Cancelar</button>
+                <button wire:click="eliminar" class="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors">Sí, eliminar</button>
+            </div>
         </div>
     </div>
     @endif

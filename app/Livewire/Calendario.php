@@ -9,8 +9,7 @@ use Livewire\Component;
 
 class Calendario extends Component
 {
-    /** @var int|string|null */
-    public $eventoId = null;
+    public ?int $eventoId = null;
 
     public string $titulo = '';
 
@@ -23,6 +22,8 @@ class Calendario extends Component
     public string $color = '#10b981';
 
     public bool $mostrarModal = false;
+
+    public bool $confirmando = false;
 
     public bool $editando = false;
 
@@ -42,8 +43,8 @@ class Calendario extends Component
 
     public function abrirModal(?string $fecha = null): void
     {
-        $this->reset(['eventoId', 'titulo', 'fechaFin', 'editando']);
-        $this->fechaInicio = $fecha ?? now()->format('Y-m-d\TH:i');
+        $this->reset(['eventoId', 'titulo', 'fechaFin', 'editando', 'confirmando']);
+        $this->fechaInicio = $fecha ?? now()->format('Y-m-d');
         $this->tipo = 'examen';
         $this->color = '#10b981';
         $this->mostrarModal = true;
@@ -54,8 +55,8 @@ class Calendario extends Component
         $evento = Evento::findOrFail($id);
         $this->eventoId = $evento->id;
         $this->titulo = $evento->titulo;
-        $this->fechaInicio = $evento->fecha_inicio->format('Y-m-d\TH:i');
-        $this->fechaFin = $evento->fecha_fin?->format('Y-m-d\TH:i') ?? '';
+        $this->fechaInicio = $evento->fecha_inicio->format('Y-m-d');
+        $this->fechaFin = $evento->fecha_fin?->format('Y-m-d') ?? '';
         $this->tipo = $evento->tipo;
         $this->color = $evento->color ?? '#10b981';
         $this->editando = true;
@@ -86,16 +87,24 @@ class Calendario extends Component
         }
 
         $this->mostrarModal = false;
+        session()->flash('message', $this->editando ? 'Evento actualizado.' : 'Evento creado.');
         $this->dispatch('eventosActualizados');
     }
 
-    public function eliminar(int $id): void
+    public function eliminar(): void
     {
-        $evento = Evento::findOrFail($id);
-        if ($evento->user_id === Auth::id()) {
-            $evento->delete();
-            $this->dispatch('eventosActualizados');
+        if ($this->eventoId === null) {
+            return;
         }
+        $evento = Evento::findOrFail($this->eventoId);
+        if ($evento->user_id !== Auth::id()) {
+            return;
+        }
+        $evento->delete();
+        $this->mostrarModal = false;
+        $this->reset(['eventoId', 'titulo', 'fechaInicio', 'fechaFin', 'editando', 'confirmando']);
+        session()->flash('message', 'Evento eliminado.');
+        $this->dispatch('eventosActualizados');
     }
 
     /** @return array<int, array<string, mixed>> */
@@ -121,8 +130,8 @@ class Calendario extends Component
             ->map(fn ($e) => [
                 'id' => $e->id,
                 'title' => $e->titulo,
-                'start' => $e->fecha_inicio->toIso8601String(),
-                'end' => $e->fecha_fin?->toIso8601String(),
+                'start' => $e->fecha_inicio->format('Y-m-d'),
+                'end' => $e->fecha_fin?->format('Y-m-d'),
                 'color' => $e->color ?? '#10b981',
                 'extendedProps' => ['tipo' => $e->tipo],
             ])
