@@ -12,34 +12,30 @@
             
             <div class="rounded-xl border border-neutral-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-6 shadow-sm text-center hover:border-emerald-300 dark:hover:border-emerald-600 transition-colors">
                 <div class="w-20 h-20 mx-auto bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold mb-4">
-                    ##
+                    EC
                 </div>
-                <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">##</h3>
-                <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-full inline-block mt-2">##</p>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Cardozo Emanuel</h3>
             </div>
 
             <div class="rounded-xl border border-neutral-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-6 shadow-sm text-center hover:border-emerald-300 dark:hover:border-emerald-600 transition-colors">
                 <div class="w-20 h-20 mx-auto bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold mb-4">
-                    ##
+                    MC
                 </div>
-                <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">##</h3>
-                <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-full inline-block mt-2">##</p>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Cardozo Mauricio</h3>
             </div>
 
             <div class="rounded-xl border border-neutral-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-6 shadow-sm text-center hover:border-emerald-300 dark:hover:border-emerald-600 transition-colors">
                 <div class="w-20 h-20 mx-auto bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold mb-4">
-                    ##
+                    LA
                 </div>
-                <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">##</h3>
-                <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-full inline-block mt-2">##</p>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Antonelli Lucas</h3>
             </div>
 
             <div class="rounded-xl border border-neutral-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-6 shadow-sm text-center hover:border-emerald-300 dark:hover:border-emerald-600 transition-colors">
                 <div class="w-20 h-20 mx-auto bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold mb-4">
-                    ##
+                    SB
                 </div>
-                <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">##</h3>
-                <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-full inline-block mt-2">##</p>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Britez Santiago</h3>
             </div>
 
         </div>
