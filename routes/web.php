@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/equipo', 'equipo')->name('equipo');
     Route::resource('materias', MateriaController::class);
     Route::get('/apuntes', ManageApuntes::class)->name('apuntes.index');
+    Route::post('/apuntes/upload', [\App\Http\Controllers\WebApunteController::class, 'store'])->name('apuntes.upload');
     Route::get('/calendario', Calendario::class)->name('calendario');
 
     Route::get('/calendario/eventos', function () {
@@ -29,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
                 'id' => $e->id,
                 'title' => $e->titulo,
                 'start' => $e->fecha_inicio->format('Y-m-d'),
-                'end' => $e->fecha_fin?->format('Y-m-d'),
+                'end' => $e->fecha_fin ? \Carbon\Carbon::parse($e->fecha_fin)->addDay()->format('Y-m-d') : null,
                 'color' => $e->color ?? '#10b981',
                 'extendedProps' => ['tipo' => $e->tipo],
             ]);

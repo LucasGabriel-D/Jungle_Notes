@@ -1,6 +1,6 @@
 <x-layouts::app :title="'Editar Materia'">
     <div class="p-6 max-w-2xl mx-auto">
-        <a href="{{ route('materias.index') }}" class="inline-flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-400 hover:text-emerald-700 transition-colors no-underline mb-6">
+        <a href="{{ route('materias.index') }}" class="inline-flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-400 hover:text-emerald-700 dark:hover:text-violet-400 transition-colors no-underline mb-6">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
             Volver a materias
         </a>

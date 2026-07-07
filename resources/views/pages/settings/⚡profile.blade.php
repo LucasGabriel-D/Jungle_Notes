@@ -67,7 +67,7 @@ new #[Title('Configuración de Perfil')] class extends Component {
     <x-pages::settings.layout heading="Perfil" subheading="Actualizá tu nombre y correo electrónico">
 
         @if (session('status') === 'profile-updated')
-            <div class="bg-emerald-100 dark:bg-violet-900/30 border-l-4 border-emerald-500 text-emerald-700 dark:text-violet-400 p-4 mb-4 rounded-lg">
+            <div class="bg-emerald-100 dark:bg-violet-900/30 border-l-4 border-emerald-500 dark:border-violet-500 text-emerald-700 dark:text-violet-400 p-4 mb-4 rounded-lg">
                 Perfil actualizado correctamente.
             </div>
         @endif
@@ -82,7 +82,7 @@ new #[Title('Configuración de Perfil')] class extends Component {
                     required
                     autofocus
                     autocomplete="name"
-                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:outline-none transition duration-150"
+                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 dark:focus:border-violet-500 focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-violet-500/10 focus:outline-none transition duration-150"
                 >
                 @error('name') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
             </div>
@@ -94,7 +94,7 @@ new #[Title('Configuración de Perfil')] class extends Component {
                     type="email"
                     required
                     autocomplete="email"
-                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:outline-none transition duration-150"
+                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 dark:focus:border-violet-500 focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-violet-500/10 focus:outline-none transition duration-150"
                 >
                 @error('email') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
 
@@ -117,7 +117,7 @@ new #[Title('Configuración de Perfil')] class extends Component {
             </div>
 
             <div class="flex items-center justify-end">
-                <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm py-2.5 px-6 rounded-xl shadow-sm transition-all duration-150">
+                <button type="submit" class="bg-emerald-600 dark:bg-violet-600 hover:bg-emerald-700 dark:hover:bg-violet-700 text-white font-semibold text-sm py-2.5 px-6 rounded-xl shadow-sm transition-all duration-150">
                     Guardar
                 </button>
             </div>

@@ -18,7 +18,7 @@
 
     <div class="space-y-2">
         @foreach($comentarios as $comentario)
-            <div class="bg-emerald-50/40 dark:bg-violet-900/20 p-3 rounded-xl border border-emerald-100/70 dark:border-violet-800/50">
+            <div class="bg-emerald-50/40 dark:bg-violet-950/20 p-3 rounded-xl border border-emerald-100/70 dark:border-violet-900/50">
                 <div class="flex justify-between items-center">
                     <span class="font-bold text-xs text-neutral-700 dark:text-neutral-300">{{ $comentario->user->name }}</span>
                     <span class="text-[10px] text-neutral-400 dark:text-neutral-500 font-medium">{{ $comentario->created_at->diffForHumans() }}</span>

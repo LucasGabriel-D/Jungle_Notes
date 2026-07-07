@@ -25,7 +25,7 @@
                     <div class="flex items-center gap-2.5 mb-2">
                         <img src="{{ asset('images/iconverde.svg') }}" class="w-18 h-18 object-contain chameleon-logo" alt="Logo">
                         <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-                            <span class="text-emerald-600">Jungle</span>Notes
+                            <span class="text-emerald-600 dark:text-violet-400">Jungle</span>Notes
                         </h1>
                     </div>
                     <p class="text-sm text-neutral-500 dark:text-neutral-400 text-center lg:text-left">Registrate para empezar a organizar tus apuntes de la facultad.</p>
@@ -42,7 +42,7 @@
                                value="{{ old('name') }}" 
                                required 
                                autofocus 
-                               class="w-full px-4 py-2 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:outline-none transition duration-150"
+                               class="w-full px-4 py-2 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 dark:focus:border-violet-500 focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-violet-500/10 focus:outline-none transition duration-150"
                                placeholder="Tu nombre y apellido">
                         @if ($errors->has('name'))
                             <p class="text-xs text-red-600 mt-1 font-medium">{{ $errors->first('name') }}</p>
@@ -56,7 +56,7 @@
                                name="email" 
                                value="{{ old('email') }}" 
                                required 
-                               class="w-full px-4 py-2 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:outline-none transition duration-150"
+                               class="w-full px-4 py-2 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 dark:focus:border-violet-500 focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-violet-500/10 focus:outline-none transition duration-150"
                                placeholder="ejemplo@correo.com">
                         @if ($errors->has('email'))
                             <p class="text-xs text-red-600 mt-1 font-medium">{{ $errors->first('email') }}</p>
@@ -69,7 +69,7 @@
                                type="password" 
                                name="password" 
                                required 
-                               class="w-full px-4 py-2 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:outline-none transition duration-150"
+                               class="w-full px-4 py-2 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 dark:focus:border-violet-500 focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-violet-500/10 focus:outline-none transition duration-150"
                                placeholder="Mínimo 8 caracteres">
                         @if ($errors->has('password'))
                             <p class="text-xs text-red-600 mt-1 font-medium">{{ $errors->first('password') }}</p>
@@ -82,12 +82,12 @@
                                type="password" 
                                name="password_confirmation" 
                                required 
-                               class="w-full px-4 py-2 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:outline-none transition duration-150"
+                               class="w-full px-4 py-2 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 dark:focus:border-violet-500 focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-violet-500/10 focus:outline-none transition duration-150"
                                placeholder="Repetí tu contraseña">
                     </div>
 
                     <div class="pt-2">
-                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow-sm hover:shadow transition-all duration-150 flex items-center justify-center cursor-pointer">
+                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 dark:bg-violet-600 dark:hover:bg-violet-700 text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow-sm hover:shadow transition-all duration-150 flex items-center justify-center cursor-pointer">
                             Crear cuenta gratis
                         </button>
                     </div>
@@ -96,7 +96,7 @@
                 <div class="mt-6 text-center border-t border-neutral-100 dark:border-zinc-700 pt-4">
                     <p class="text-xs text-neutral-500 dark:text-neutral-400">
                         ¿Ya tenés una cuenta? 
-                        <a href="{{ route('login') }}" class="font-semibold text-emerald-600 hover:text-emerald-700 transition">
+                        <a href="{{ route('login') }}" class="font-semibold text-emerald-600 hover:text-emerald-700 dark:text-violet-400 dark:hover:text-violet-400 transition">
                             Iniciá sesión
                         </a>
                     </p>
@@ -112,7 +112,7 @@
             <div class="max-w-md text-center z-10">
                 
                 <h2 class="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 mb-4">
-                    Tus apuntes universitarios, <span class="text-emerald-600">organizados en un solo lugar.</span>
+                    Tus apuntes universitarios, <span class="text-emerald-600 dark:text-violet-400">organizados en un solo lugar.</span>
                 </h2>
                 <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
                     Compartí, ordená y comentá el material de estudio con tus compañeros de cursada. Simplificá tu vida académica.

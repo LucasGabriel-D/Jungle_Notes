@@ -44,7 +44,8 @@ class Calendario extends Component
     public function abrirModal(?string $fecha = null): void
     {
         $this->reset(['eventoId', 'titulo', 'fechaFin', 'editando', 'confirmando']);
-        $this->fechaInicio = $fecha ?? now()->format('Y-m-d');
+        $parsed = $fecha ? \Carbon\Carbon::parse($fecha) : now();
+        $this->fechaInicio = $parsed->format('Y-m-d\TH:i');
         $this->tipo = 'examen';
         $this->color = '#10b981';
         $this->mostrarModal = true;
@@ -55,8 +56,8 @@ class Calendario extends Component
         $evento = Evento::findOrFail($id);
         $this->eventoId = $evento->id;
         $this->titulo = $evento->titulo;
-        $this->fechaInicio = $evento->fecha_inicio->format('Y-m-d');
-        $this->fechaFin = $evento->fecha_fin?->format('Y-m-d') ?? '';
+        $this->fechaInicio = $evento->fecha_inicio->format('Y-m-d\TH:i');
+        $this->fechaFin = $evento->fecha_fin?->format('Y-m-d\TH:i') ?? '';
         $this->tipo = $evento->tipo;
         $this->color = $evento->color ?? '#10b981';
         $this->editando = true;
@@ -118,8 +119,9 @@ class Calendario extends Component
         return array_map(fn ($f) => [
             'title' => $f['title'],
             'start' => $f['date'],
-            'color' => $f['color'],
-            'display' => 'background',
+            'color' => 'transparent',
+            'textColor' => $f['color'],
+            'className' => 'feriado-event',
             'extendedProps' => ['tipo' => 'feriado'],
         ], $feriados);
     }
@@ -129,14 +131,38 @@ class Calendario extends Component
     {
         $eventos = Evento::where('user_id', Auth::id())
             ->get()
-            ->map(fn ($e) => [
-                'id' => $e->id,
-                'title' => $e->titulo,
-                'start' => $e->fecha_inicio->format('Y-m-d'),
-                'end' => $e->fecha_fin?->format('Y-m-d'),
-                'color' => $e->color ?? '#10b981',
-                'extendedProps' => ['tipo' => $e->tipo],
-            ])
+            ->flatMap(function ($e) {
+                $evs = [];
+                $isAllDay = $e->fecha_inicio->format('H:i:s') === '00:00:00' && 
+                           (!$e->fecha_fin || $e->fecha_fin->format('H:i:s') === '00:00:00');
+                
+                $spansDays = $e->fecha_fin && $e->fecha_fin->format('Y-m-d') !== $e->fecha_inicio->format('Y-m-d');
+
+                // Evento Principal / Inicio
+                $evs[] = [
+                    'id' => $e->id,
+                    'title' => $spansDays ? $e->titulo . ' (Inicio)' : $e->titulo,
+                    'start' => $isAllDay ? $e->fecha_inicio->format('Y-m-d') : $e->fecha_inicio->format('Y-m-d\TH:i:s'),
+                    'end' => (!$spansDays && $e->fecha_fin && !$isAllDay) ? $e->fecha_fin->format('Y-m-d\TH:i:s') : null,
+                    'allDay' => $isAllDay,
+                    'color' => $e->color ?? '#10b981',
+                    'extendedProps' => ['tipo' => $e->tipo, 'originalId' => $e->id],
+                ];
+                
+                // Evento de Fin (si abarca varios días)
+                if ($spansDays) {
+                    $evs[] = [
+                        'id' => $e->id . '_fin',
+                        'title' => $e->titulo . ' (Fin)',
+                        'start' => $isAllDay ? \Carbon\Carbon::parse($e->fecha_fin)->addDay()->format('Y-m-d') : $e->fecha_fin->format('Y-m-d\TH:i:s'),
+                        'allDay' => $isAllDay,
+                        'color' => $e->color ?? '#10b981',
+                        'extendedProps' => ['tipo' => $e->tipo, 'originalId' => $e->id],
+                    ];
+                }
+                
+                return $evs;
+            })
             ->toArray();
 
         return array_merge($eventos, $this->getFeriados());

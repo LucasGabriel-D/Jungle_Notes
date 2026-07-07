@@ -54,6 +54,9 @@ class BlocNotas extends Component
     {
         $this->validate([
             'contenido' => 'required|min:1|max:1000',
+        ], [
+            'contenido.required' => 'La nota no puede estar vacía.',
+            'contenido.max' => 'La nota es demasiado larga.',
         ]);
 
         Nota::create([
