@@ -10,8 +10,11 @@ use Livewire\Component;
 class BlocNotas extends Component
 {
     public string $contenido = '';
+
     public string $fechaSeleccionada;
+
     public int $mesActual;
+
     public int $anioActual;
 
     public function mount(): void
@@ -82,7 +85,7 @@ class BlocNotas extends Component
             ->whereYear('fecha', $this->anioActual)
             ->whereMonth('fecha', $this->mesActual)
             ->pluck('fecha')
-            ->map(fn($f) => $f->format('Y-m-d'))
+            ->map(fn ($f) => $f->format('Y-m-d'))
             ->unique()
             ->toArray();
 
