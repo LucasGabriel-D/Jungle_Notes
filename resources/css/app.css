@@ -215,3 +215,21 @@ button, [role="button"], [data-flux-button] {
 .dark [data-test="sidebar-menu-button"] span {
     color: #f4f4f5 !important;
 }
+.dark [data-flux-sidebar-item]:hover {
+    background-color: #3f3f46 !important;
+}
+
+.dark [data-flux-sidebar-item][aria-current="page"] {
+    background-color: #3f3f46 !important;
+}
+.dark [data-flux-sidebar-item] {
+    color: #a1a1aa !important;
+}
+
+.dark [data-flux-sidebar-item]:hover {
+    color: #f4f4f5 !important;
+}
+
+.dark [data-flux-sidebar-item][aria-current="page"] {
+    color: #f4f4f5 !important;
+}
