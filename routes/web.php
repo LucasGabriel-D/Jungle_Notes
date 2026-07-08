@@ -14,32 +14,32 @@ if (!function_exists('obtenerEquipoIceberg')) {
     function obtenerEquipoIceberg() {
         return [
             'emanuel' => [
-                'nombre' => 'Cardozo Emanuel',
+                'nombre' => 'Cardozo  B. Emanuel',
                 'iniciales' => 'EC',
-                'github' => 'https://github.com/usuario-emanuel',
-                'email' => 'emanuel@email.com',
-                'instagram' => 'https://instagram.com/emanuel'
+                'github' => 'https://github.com/cardozoemanuel456-glitch',
+                'email' => 'cardozoemanuel456@gmail.com',
+                'instagram' => 'https://instagram.com/romeo_.prince'
             ],
             'mauricio' => [
                 'nombre' => 'Cardozo Mauricio',
                 'iniciales' => 'MC',
                 'github' => 'https://github.com/Mauricio-Cardozo',
-                'email' => 'mauricio@email.com',
+                'email' => 'mauricionair2004@gmail.com',
                 'instagram' => 'https://instagram.com/mauricio'
             ],
             'lucas' => [
                 'nombre' => 'Antonelli Lucas',
                 'iniciales' => 'LA',
                 'github' => 'https://github.com/LucasGabriel-D',
-                'email' => 'lucas@email.com',
-                'instagram' => 'https://instagram.com/lucas'
+                'email' => 'antonellilucas0609@gmail.com',
+                'instagram' => 'https://instagram.com/lucasgabriel_an'
             ],
             'santiago' => [
-                'nombre' => 'Britez Santiago',
+                'nombre' => 'Benitez Santiago',
                 'iniciales' => 'SB',
-                'github' => 'https://github.com/usuario-santiago',
-                'email' => 'santiago@email.com',
-                'instagram' => 'https://instagram.com/santiago'
+                'github' => 'https://github.com/SantuBntz',
+                'email' => 'santiago789564@gmail.com',
+                'instagram' => 'https://instagram.com/santi.b3'
             ]
         ];
     }
