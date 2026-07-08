@@ -9,6 +9,43 @@ use App\Models\Evento;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+// --- DATOS DEL EQUIPO ICEBERG ---
+if (!function_exists('obtenerEquipoIceberg')) {
+    function obtenerEquipoIceberg() {
+        return [
+            'emanuel' => [
+                'nombre' => 'Cardozo Emanuel',
+                'iniciales' => 'EC',
+                'github' => 'https://github.com/usuario-emanuel',
+                'email' => 'emanuel@email.com',
+                'instagram' => 'https://instagram.com/emanuel'
+            ],
+            'mauricio' => [
+                'nombre' => 'Cardozo Mauricio',
+                'iniciales' => 'MC',
+                'github' => 'https://github.com/Mauricio-Cardozo',
+                'email' => 'mauricio@email.com',
+                'instagram' => 'https://instagram.com/mauricio'
+            ],
+            'lucas' => [
+                'nombre' => 'Antonelli Lucas',
+                'iniciales' => 'LA',
+                'github' => 'https://github.com/LucasGabriel-D',
+                'email' => 'lucas@email.com',
+                'instagram' => 'https://instagram.com/lucas'
+            ],
+            'santiago' => [
+                'nombre' => 'Britez Santiago',
+                'iniciales' => 'SB',
+                'github' => 'https://github.com/usuario-santiago',
+                'email' => 'santiago@email.com',
+                'instagram' => 'https://instagram.com/santiago'
+            ]
+        ];
+    }
+}
+// --------------------------------
+
 Route::get('/', function () {
     $theme = config('app.landing_theme', 'morado');
 
@@ -17,7 +54,25 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::view('/equipo', 'equipo')->name('equipo');
+    
+    // --- RUTAS DEL EQUIPO (Reemplaza a la vista estática) ---
+    Route::prefix('equipo')->group(function () {
+        Route::get('/', function () {
+            $equipo = obtenerEquipoIceberg();
+            return view('equipo', compact('equipo'));
+        })->name('equipo.index');
+
+        Route::get('/{slug}', function ($slug) {
+            $equipo = obtenerEquipoIceberg();
+            if (!array_key_exists($slug, $equipo)) {
+                abort(404);
+            }
+            $miembro = $equipo[$slug];
+            return view('equipo-perfil', compact('miembro'));
+        })->name('equipo.show');
+    });
+    // --------------------------------------------------------
+
     Route::resource('materias', MateriaController::class);
     Route::get('/apuntes', ManageApuntes::class)->name('apuntes.index');
     Route::post('/apuntes/upload', [\App\Http\Controllers\WebApunteController::class, 'store'])->name('apuntes.upload');
