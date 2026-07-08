@@ -3,7 +3,10 @@
         
         <div class="border-b border-neutral-200 dark:border-zinc-700 pb-5 mb-6">
             <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
-                <span class="text-emerald-600 dark:text-violet-400">🧊</span> Equipo Iceberg
+                <svg class="w-7 h-7 text-emerald-600 dark:text-violet-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M2 12h20M12 9l3-3M12 15l3 3M12 9l-3-3M12 15l-3 3M9 12l-3-3M15 12l3-3M9 12l-3 3M15 12l3 3" />
+                </svg>
+             Equipo Iceberg
             </h2>
             <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Desarrolladores del proyecto Jungle Notes para Programación III.</p>
         </div>
