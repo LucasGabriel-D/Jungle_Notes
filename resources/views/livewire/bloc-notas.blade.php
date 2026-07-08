@@ -2,7 +2,7 @@
     <h2 class="text-2xl font-bold mb-6 text-neutral-800 dark:text-neutral-100">Bloc de Notas</h2>
 
     @if (session()->has('message'))
-        <div class="bg-emerald-100 dark:bg-emerald-900/30 border-l-4 border-emerald-500 text-emerald-700 dark:text-emerald-400 p-4 mb-4 rounded-lg">
+        <div class="bg-emerald-100 dark:bg-violet-950/30 border-l-4 border-emerald-500 text-emerald-700 dark:text-violet-400 p-4 mb-4 rounded-lg">
             {{ session('message') }}
         </div>
     @endif
@@ -54,11 +54,11 @@
                     <button
                         wire:click="seleccionarFecha('{{ $fecha }}')"
                         class="relative flex items-center justify-center h-9 w-full rounded-lg text-sm font-medium transition-all duration-150
-                            {{ $esSeleccionado ? 'bg-emerald-600 text-white' : ($esHoy ? 'border-2 border-emerald-500 text-emerald-700 dark:text-emerald-400' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-zinc-700') }}"
+                            {{ $esSeleccionado ? 'bg-emerald-600 dark:bg-violet-600 text-white' : ($esHoy ? 'border-2 border-emerald-500 dark:border-violet-500 text-emerald-700 dark:text-violet-400' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-zinc-700') }}"
                     >
                         {{ $dia }}
                         @if ($tieneNotas && !$esSeleccionado)
-                            <span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-emerald-500"></span>
+                            <span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-emerald-500 dark:bg-violet-500"></span>
                         @endif
                     </button>
                 @endfor
@@ -78,13 +78,13 @@
                     wire:model="contenido"
                     rows="4"
                     placeholder="Escribí una nota rápida..."
-                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 focus:outline-none transition duration-150 resize-none"
+                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-neutral-900 dark:text-neutral-100 text-sm focus:border-emerald-500 dark:focus:border-violet-500 focus:ring-4 focus:ring-emerald-500/10 dark:focus:ring-violet-500/10 focus:outline-none transition duration-150 resize-none"
                 ></textarea>
                 @error('contenido') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
                 <button
                     wire:click="guardarNota"
-                    class="mt-3 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow-sm transition-all duration-150"
+                    class="mt-3 w-full bg-emerald-600 hover:bg-emerald-700 dark:bg-violet-600 dark:hover:bg-violet-700 text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow-sm transition-all duration-150"
                 >
                     Guardar nota
                 </button>
@@ -97,7 +97,7 @@
                 </h3>
 
                 @forelse($notasDelDia as $nota)
-                    <div class="p-3 bg-emerald-50/40 dark:bg-emerald-900/20 rounded-xl border border-emerald-100 dark:border-emerald-800/50 flex items-start justify-between gap-3">
+                    <div class="p-3 bg-emerald-50/40 dark:bg-violet-950/20 rounded-xl border border-emerald-100 dark:border-violet-900/50 flex items-start justify-between gap-3">
                         <p class="text-sm text-neutral-700 dark:text-neutral-300 flex-1">{{ $nota->contenido }}</p>
                         <button
                             wire:click="eliminarNota({{ $nota->id }})"

@@ -24,7 +24,7 @@
                     <a href="{{ route('home') }}" class="z-20 flex flex-col items-center gap-2 font-medium lg:hidden" wire:navigate>
                         <span class="flex items-center gap-2">
                             <img src="{{ asset('images/iconverde.png') }}" class="w-9 h-9 object-contain" alt="Logo">
-                            <span class="text-lg font-bold text-emerald-600">JungleNotes</span>
+                            <span class="text-lg font-bold text-emerald-600 dark:text-violet-400">JungleNotes</span>
                         </span>
                     </a>
                     {{ $slot }}

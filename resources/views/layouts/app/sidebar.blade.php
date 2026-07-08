@@ -10,7 +10,7 @@
                     <img src="{{ asset('images/iconverde.svg') }}" class="w-14 h-14 shrink-0 object-contain chameleon-logo" alt="Logo">
 <div class="min-w-0">
     <h1 class="text-base font-bold text-neutral-900 leading-tight">
-        <span class="block text-emerald-600">Jungle</span>
+        <span class="block text-emerald-600 dark:text-violet-400">Jungle</span>
         <span class="block dark:text-white">Notes</span>
     </h1>
     <p class="text-[10px] text-neutral-400 font-medium">UTN FRRE</p>
@@ -27,12 +27,10 @@
                     <flux:sidebar.item icon="book-open" :href="route('materias.index')" :current="request()->routeIs('materias.*')" wire:navigate>
                         {{ __('Mis Materias') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="document-text" :href="route('bloc-notas.index')" :current="request()->routeIs('bloc-notas.*')" wire:navigate>
-                    {{ __('Bloc de Notas') }}
+                    
+                    <flux:sidebar.item icon="calendar-days" href="{{ route('calendario') }}" :current="request()->routeIs('calendario*')" wire:navigate>
+                        {{ __('Calendario') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="calendar-days" :href="route('calendario.index')" :current="request()->routeIs('calendario.*')" wire:navigate>
-    {{ __('Calendario') }}
-</flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
@@ -47,13 +45,7 @@
             </flux:sidebar.nav>
 
             <x-desktop-user-menu class="hidden lg:block" />
-            <flux:sidebar.item 
-              icon="moon" 
-              onclick="toggleDarkMode()" 
-                 class="cursor-pointer"
->       
-              {{ __('Modo Oscuro') }}
-            </flux:sidebar.item>
+            
                   </flux:sidebar>
 
         <!-- Mobile Header with User Menu -->
@@ -63,7 +55,7 @@
             <flux:spacer />
 
             <div class="flex items-center gap-2">
-                <span class="text-sm font-bold text-emerald-600">JungleNotes</span>
+                <span class="text-sm font-bold text-emerald-600 dark:text-violet-400">JungleNotes</span>
             </div>
 
             <flux:spacer />

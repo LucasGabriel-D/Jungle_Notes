@@ -62,9 +62,9 @@ new #[Title('Apariencia')] class extends Component {
                 document.querySelectorAll('.theme-btn').forEach(btn => {
                     if (btn.dataset.theme === activeTheme) {
                         btn.className = btn.className.replace('border-neutral-200 dark:border-zinc-700 text-neutral-600 dark:text-neutral-400', '');
-                        btn.classList.add('border-emerald-500', 'bg-emerald-50', 'dark:bg-emerald-900/30', 'text-emerald-700', 'dark:text-emerald-400');
+                        btn.classList.add('border-emerald-500', 'dark:border-violet-500', 'bg-emerald-50', 'dark:bg-violet-900/30', 'text-emerald-700', 'dark:text-violet-400');
                     } else {
-                        btn.classList.remove('border-emerald-500', 'bg-emerald-50', 'dark:bg-emerald-900/30', 'text-emerald-700', 'dark:text-emerald-400');
+                        btn.classList.remove('border-emerald-500', 'dark:border-violet-500', 'bg-emerald-50', 'dark:bg-violet-900/30', 'text-emerald-700', 'dark:text-violet-400');
                         btn.classList.add('border-neutral-200', 'dark:border-zinc-700', 'text-neutral-600', 'dark:text-neutral-400');
                     }
                 });

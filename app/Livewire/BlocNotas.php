@@ -10,8 +10,11 @@ use Livewire\Component;
 class BlocNotas extends Component
 {
     public string $contenido = '';
+
     public string $fechaSeleccionada;
+
     public int $mesActual;
+
     public int $anioActual;
 
     public function mount(): void
@@ -51,6 +54,9 @@ class BlocNotas extends Component
     {
         $this->validate([
             'contenido' => 'required|min:1|max:1000',
+        ], [
+            'contenido.required' => 'La nota no puede estar vacía.',
+            'contenido.max' => 'La nota es demasiado larga.',
         ]);
 
         Nota::create([
@@ -74,7 +80,7 @@ class BlocNotas extends Component
     public function render(): View
     {
         $notasDelDia = Nota::where('user_id', Auth::id())
-            ->where('fecha', $this->fechaSeleccionada)
+            ->whereDate('fecha', $this->fechaSeleccionada)
             ->latest()
             ->get();
 
@@ -82,7 +88,7 @@ class BlocNotas extends Component
             ->whereYear('fecha', $this->anioActual)
             ->whereMonth('fecha', $this->mesActual)
             ->pluck('fecha')
-            ->map(fn($f) => $f->format('Y-m-d'))
+            ->map(fn ($f) => $f->format('Y-m-d'))
             ->unique()
             ->toArray();
 
