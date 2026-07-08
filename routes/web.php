@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 // --- DATOS DEL EQUIPO ICEBERG ---
 if (!function_exists('obtenerEquipoIceberg')) {
-    function obtenerEquipoIceberg() {
+    function obtenerEquipoIceberg(): array{
         return [
             'emanuel' => [
                 'nombre' => 'Cardozo  B. Emanuel',
@@ -53,7 +53,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
-    // --- RUTAS DEL EQUIPO (Reemplaza a la vista estática) ---
+    // --- RUTAS DEL EQUIPO  ---
     Route::prefix('equipo')->group(function () {
         Route::get('/', function () {
             $equipo = obtenerEquipoIceberg();
