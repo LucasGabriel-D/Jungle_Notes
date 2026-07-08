@@ -46,10 +46,40 @@ select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
 
+.chameleon-logo {
+    filter: invert(48%) sepia(79%) saturate(476%) hue-rotate(86deg) brightness(95%) contrast(95%);
+    transition: filter 0.7s ease;
+}
+
+.dark .chameleon-logo {
+    filter: invert(27%) sepia(89%) saturate(1200%) hue-rotate(243deg) brightness(85%) contrast(95%);
+}
+
+.chameleon-pulse {
+    animation: chameleonPulse 0.6s ease;
+}
+
+@keyframes chameleonPulse {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.2); }
+    50%  { transform: scale(0.95); }
+    75%  { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* =========================================
+   FLUX SIDEBAR — Light mode (Emerald)
+   ========================================= */
+
 [data-flux-sidebar] {
     --color-accent: var(--color-emerald-600);
     --color-accent-content: var(--color-emerald-600);
     --color-accent-foreground: var(--color-white);
+}
+
+[data-flux-sidebar] [data-flux-sidebar-item] {
+    color: var(--color-neutral-600);
+    transition: all 0.15s ease;
 }
 
 [data-flux-sidebar] [data-flux-sidebar-item][data-current] {
@@ -62,38 +92,12 @@ select:focus[data-flux-control] {
     color: var(--color-emerald-700);
 }
 
-[data-flux-sidebar] [data-flux-sidebar-item] {
-    color: var(--color-neutral-600);
-    transition: all 0.15s ease;
-}
-
 [data-flux-sidebar] [data-flux-sidebar-profile]:hover {
     background-color: var(--color-emerald-50);
 }
 
-[data-flux-sidebar] [data-flux-sidebar-profile][data-flux-sidebar-profile] [data-flux-icon] {
+[data-flux-sidebar] [data-flux-sidebar-profile] [data-flux-icon] {
     color: var(--color-emerald-600);
-}
-
-[data-flux-menu] {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-neutral-200);
-}
-
-[data-flux-menu-item] {
-    color: var(--color-neutral-700);
-}
-
-[data-flux-menu-item]:hover {
-    background-color: var(--color-emerald-50);
-}
-
-[data-flux-menu-item] [data-flux-icon] {
-    color: var(--color-emerald-600);
-}
-
-[data-flux-menu-item]:hover {
-    background-color: var(--color-emerald-50);
 }
 
 [data-flux-sidebar] [data-flux-sidebar-profile] {
@@ -112,10 +116,6 @@ select:focus[data-flux-control] {
     color: var(--color-neutral-500);
 }
 
-[data-flux-sidebar] [data-flux-sidebar-profile] [data-flux-icon] {
-    color: var(--color-emerald-600);
-}
-
 [data-flux-sidebar] [data-flux-sidebar-heading] {
     color: var(--color-neutral-400);
     font-weight: 600;
@@ -123,6 +123,104 @@ select:focus[data-flux-control] {
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
+
+/* =========================================
+   FLUX SIDEBAR — Dark mode (Violet)
+   ========================================= */
+
+.dark [data-flux-sidebar] {
+    --color-accent: var(--color-violet-600);
+    --color-accent-content: var(--color-violet-600);
+    --color-accent-foreground: var(--color-white);
+}
+
+.dark [data-flux-sidebar] [data-flux-sidebar-item] {
+    color: var(--color-zinc-400);
+}
+
+.dark [data-flux-sidebar] [data-flux-sidebar-item][data-current] {
+    background-color: var(--color-violet-950);
+    color: var(--color-zinc-100);
+}
+
+.dark [data-flux-sidebar] [data-flux-sidebar-item]:hover {
+    background-color: var(--color-violet-950);
+    color: var(--color-zinc-100);
+}
+
+.dark [data-flux-sidebar] [data-flux-sidebar-profile]:hover {
+    background-color: var(--color-violet-950);
+}
+
+.dark [data-flux-sidebar] [data-flux-sidebar-profile] [data-flux-icon] {
+    color: var(--color-violet-400);
+}
+
+.dark [data-flux-sidebar] [data-flux-sidebar-profile] {
+    color: var(--color-zinc-300);
+}
+
+.dark [data-flux-sidebar] [data-flux-sidebar-profile] > span {
+    color: var(--color-zinc-200);
+}
+
+.dark [data-flux-sidebar] [data-flux-sidebar-profile] [data-flux-heading] {
+    color: var(--color-zinc-100);
+}
+
+.dark [data-flux-sidebar] [data-flux-sidebar-profile] [data-flux-text] {
+    color: var(--color-zinc-400);
+}
+
+.dark [data-flux-sidebar] [data-flux-sidebar-heading] {
+    color: var(--color-zinc-500);
+}
+
+/* =========================================
+   FLUX MENU — Light mode
+   ========================================= */
+
+[data-flux-menu] {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-neutral-200);
+}
+
+[data-flux-menu-item] {
+    color: var(--color-neutral-700);
+}
+
+[data-flux-menu-item]:hover {
+    background-color: var(--color-emerald-50);
+}
+
+[data-flux-menu-item] [data-flux-icon] {
+    color: var(--color-emerald-600);
+}
+
+/* =========================================
+   FLUX MENU — Dark mode
+   ========================================= */
+
+.dark [data-flux-menu] {
+    background-color: var(--color-zinc-800);
+    border-color: var(--color-zinc-700);
+}
+
+.dark [data-flux-menu-item] {
+    color: var(--color-zinc-300);
+}
+
+.dark [data-flux-menu-item]:hover {
+    background-color: var(--color-violet-950);
+}
+
+.dark [data-flux-menu-item] [data-flux-icon] {
+    color: var(--color-violet-400);
+}
+
+/* =========================================
+   FLUX NAVLIST — Light mode
+   ========================================= */
 
 [data-flux-navlist-item] {
     color: var(--color-neutral-600);
@@ -137,6 +235,44 @@ select:focus[data-flux-control] {
 [data-flux-navlist-item][data-current] {
     background-color: color-mix(in srgb, var(--color-emerald-600) 10%, transparent);
     color: var(--color-emerald-700);
+}
+
+/* =========================================
+   FLUX NAVLIST — Dark mode
+   ========================================= */
+
+.dark [data-flux-navlist-item] {
+    color: var(--color-zinc-400);
+}
+
+.dark [data-flux-navlist-item]:hover {
+    background-color: var(--color-violet-950);
+    color: var(--color-zinc-100);
+}
+
+.dark [data-flux-navlist-item][data-current] {
+    background-color: var(--color-violet-950);
+    color: var(--color-zinc-100);
+}
+
+/* =========================================
+   FLUX OTHER — Dark mode
+   ========================================= */
+
+.dark [data-flux-heading] {
+    color: var(--color-zinc-100);
+}
+
+.dark [data-flux-subheading] {
+    color: var(--color-zinc-400);
+}
+
+.dark [data-flux-input] input {
+    color: var(--color-zinc-100);
+}
+
+.dark [data-flux-label] {
+    color: var(--color-zinc-300);
 }
 
 [data-flux-heading] {

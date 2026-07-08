@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Materia;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class MateriaController extends Controller
 {
     public function index(): View
     {
-        $materias = Materia::withCount('apuntes')->get();
+        $materias = Materia::withCount('apuntes')
+            ->where('user_id', Auth::id())
+            ->get();
 
         return view('materias.index', compact('materias'));
     }
@@ -24,11 +28,12 @@ class MateriaController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'nombre' => 'required|unique:materias',
+            'nombre' => 'required|unique:materias,nombre,NULL,id,user_id,'.Auth::id(),
             'descripcion' => 'nullable',
             'anio' => 'required|integer|min:1|max:5',
         ]);
 
+        $validated['user_id'] = Auth::id();
         Materia::create($validated);
 
         return redirect()->route('materias.index')->with('message', 'Materia creada correctamente.');
@@ -36,6 +41,8 @@ class MateriaController extends Controller
 
     public function show(Materia $materia): View
     {
+        abort_if($materia->user_id !== Auth::id(), 403);
+
         $materia->load(['apuntes' => function ($q) {
             $q->with('user')->latest();
         }]);
@@ -45,13 +52,17 @@ class MateriaController extends Controller
 
     public function edit(Materia $materia): View
     {
+        abort_if($materia->user_id !== Auth::id(), 403);
+
         return view('materias.edit', compact('materia'));
     }
 
     public function update(Request $request, Materia $materia): RedirectResponse
     {
+        abort_if($materia->user_id !== Auth::id(), 403);
+
         $validated = $request->validate([
-            'nombre' => 'required|unique:materias,nombre,'.$materia->id,
+            'nombre' => 'required|unique:materias,nombre,'.$materia->id.',id,user_id,'.Auth::id(),
             'descripcion' => 'nullable',
             'anio' => 'required|integer|min:1|max:5',
         ]);
@@ -63,6 +74,12 @@ class MateriaController extends Controller
 
     public function destroy(Materia $materia): RedirectResponse
     {
+        abort_if($materia->user_id !== Auth::id(), 403);
+
+        foreach ($materia->apuntes as $apunte) {
+            Storage::disk('public')->delete($apunte->ruta_archivo);
+        }
+        Storage::disk('public')->deleteDirectory('apuntes/materia_'.$materia->id);
         $materia->delete();
 
         return redirect()->route('materias.index')->with('message', 'Materia eliminada correctamente.');
