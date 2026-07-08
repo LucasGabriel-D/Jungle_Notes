@@ -47,9 +47,7 @@ if (!function_exists('obtenerEquipoIceberg')) {
 // --------------------------------
 
 Route::get('/', function () {
-    $theme = config('app.landing_theme', 'morado');
-
-    return view($theme === 'verde' ? 'inicioverde' : 'iniciomorado');
+    return view('inicioverde');
 })->name('home');
 
 Route::middleware(['auth'])->group(function () {
