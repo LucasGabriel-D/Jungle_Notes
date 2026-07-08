@@ -84,7 +84,7 @@
                             <td class="px-4 py-3 text-sm space-x-2">
                                 <a href="{{ asset('storage/' . $apunte->ruta_archivo) }}" target="_blank" class="text-emerald-600 dark:text-violet-400 hover:text-emerald-800 dark:hover:text-violet-300 font-semibold">Abrir</a>
                                 @if($apunte->user_id === auth()->id())
-                                    <button wire:click="delete({{ $apunte->id }})" wire:confirm="¿Seguro que deseas eliminar?" class="text-red-500 hover:text-red-700 font-semibold cursor-pointer">Eliminar</button>
+                                    <button wire:click="confirmDelete({{ $apunte->id }})" class="text-red-500 hover:text-red-700 font-semibold cursor-pointer">Eliminar</button>
                                 @endif
                             </td>
                         </tr>
@@ -98,4 +98,12 @@
             </table>
         </div>
     </div>
+
+    <x-confirm-modal
+        show="confirmingDeletion"
+        title="Eliminar Apunte"
+        message="¿Estás seguro de que quieres eliminar este apunte? Esta acción no se puede deshacer."
+        confirmText="Sí, eliminar"
+        confirmEvent="deleteApunte()"
+    />
 </div>

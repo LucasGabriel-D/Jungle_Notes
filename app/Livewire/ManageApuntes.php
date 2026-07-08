@@ -16,6 +16,22 @@ class ManageApuntes extends Component
     use WithFileUploads;
 
     public string $search = '';
+    public bool $confirmingDeletion = false;
+    public ?int $apunteIdBeingDeleted = null;
+
+    public function confirmDelete(int $id): void
+    {
+        $this->apunteIdBeingDeleted = $id;
+        $this->confirmingDeletion = true;
+    }
+
+    public function deleteApunte(): void
+    {
+        if (!$this->apunteIdBeingDeleted) return;
+        $this->delete($this->apunteIdBeingDeleted);
+        $this->confirmingDeletion = false;
+        $this->apunteIdBeingDeleted = null;
+    }
 
     public function delete(int $id): void
     {
