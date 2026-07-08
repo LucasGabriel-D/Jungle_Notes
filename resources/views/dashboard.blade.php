@@ -8,14 +8,8 @@
                     <span>Comunidad:</span>
                     <span class="bg-emerald-600 dark:bg-violet-600 text-white px-2 py-0.5 text-xs rounded-full">{{ $totalApuntes }}</span>
                 </div>
-                <div class="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 shrink-0">
-                    <span>Materias Activas:</span>
-                    <span class="bg-neutral-100 dark:bg-zinc-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 text-xs rounded-full">{{ $totalMaterias }}</span>
-                </div>
-                <div class="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 shrink-0">
-                    <span>Mis Aportes:</span>
-                    <span class="bg-neutral-100 dark:bg-zinc-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 text-xs rounded-full">{{ $misApuntes }}</span>
-                </div>
+                
+                
             </div>
             <a href="{{ route('apuntes.index') }}" class="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 dark:bg-violet-600 dark:hover:bg-violet-700 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-sm transition-all duration-150 mr-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

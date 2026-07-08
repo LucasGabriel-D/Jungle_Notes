@@ -11,11 +11,7 @@
                 {{ request()->routeIs('security.edit') ? 'bg-emerald-50 dark:bg-violet-900/30 text-emerald-700 dark:text-violet-400' : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-zinc-700' }}">
                 Seguridad
             </a>
-            <a href="{{ route('appearance.edit') }}" wire:navigate
-                class="px-3 py-2 rounded-lg text-sm font-medium transition-colors
-                {{ request()->routeIs('appearance.edit') ? 'bg-emerald-50 dark:bg-violet-900/30 text-emerald-700 dark:text-violet-400' : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-zinc-700' }}">
-                Apariencia
-            </a>
+            
         </nav>
     </div>
 
