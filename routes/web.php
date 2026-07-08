@@ -9,17 +9,71 @@ use App\Models\Evento;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $theme = config('app.landing_theme', 'morado');
+// --- DATOS DEL EQUIPO ICEBERG ---
+if (!function_exists('obtenerEquipoIceberg')) {
+    function obtenerEquipoIceberg(): array{
+        return [
+            'emanuel' => [
+                'nombre' => 'Cardozo  B. Emanuel',
+                'iniciales' => 'EC',
+                'github' => 'https://github.com/cardozoemanuel456-glitch',
+                'email' => 'cardozoemanuel456@gmail.com',
+                'instagram' => 'https://instagram.com/romeo_.prince'
+            ],
+            'mauricio' => [
+                'nombre' => 'Cardozo Mauricio',
+                'iniciales' => 'MC',
+                'github' => 'https://github.com/Mauricio-Cardozo',
+                'email' => 'mauricionair2004@gmail.com',
+                'instagram' => 'https://instagram.com/mauricio'
+            ],
+            'lucas' => [
+                'nombre' => 'Antonelli Lucas',
+                'iniciales' => 'LA',
+                'github' => 'https://github.com/LucasGabriel-D',
+                'email' => 'antonellilucas0609@gmail.com',
+                'instagram' => 'https://instagram.com/lucasgabriel_an'
+            ],
+            'santiago' => [
+                'nombre' => 'Benitez Santiago',
+                'iniciales' => 'SB',
+                'github' => 'https://github.com/SantuBntz',
+                'email' => 'santiago789564@gmail.com',
+                'instagram' => 'https://instagram.com/santi.b3'
+            ]
+        ];
+    }
+}
+// --------------------------------
 
-    return view($theme === 'verde' ? 'inicioverde' : 'iniciomorado');
+Route::get('/', function () {
+    return view('inicioverde');
 })->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::view('/equipo', 'equipo')->name('equipo');
+    
+    // --- RUTAS DEL EQUIPO  ---
+    Route::prefix('equipo')->group(function () {
+        Route::get('/', function () {
+            $equipo = obtenerEquipoIceberg();
+            return view('equipo', compact('equipo'));
+        })->name('equipo.index');
+
+        Route::get('/{slug}', function ($slug) {
+            $equipo = obtenerEquipoIceberg();
+            if (!array_key_exists($slug, $equipo)) {
+                abort(404);
+            }
+            $miembro = $equipo[$slug];
+            return view('equipo-perfil', compact('miembro'));
+        })->name('equipo.show');
+    });
+    // --------------------------------------------------------
+
     Route::resource('materias', MateriaController::class);
     Route::get('/apuntes', ManageApuntes::class)->name('apuntes.index');
+    Route::post('/apuntes/upload', [\App\Http\Controllers\WebApunteController::class, 'store'])->name('apuntes.upload');
     Route::get('/calendario', Calendario::class)->name('calendario');
 
     Route::get('/calendario/eventos', function () {
@@ -29,7 +83,7 @@ Route::middleware(['auth'])->group(function () {
                 'id' => $e->id,
                 'title' => $e->titulo,
                 'start' => $e->fecha_inicio->format('Y-m-d'),
-                'end' => $e->fecha_fin?->format('Y-m-d'),
+                'end' => $e->fecha_fin ? \Carbon\Carbon::parse($e->fecha_fin)->addDay()->format('Y-m-d') : null,
                 'color' => $e->color ?? '#10b981',
                 'extendedProps' => ['tipo' => $e->tipo],
             ]);

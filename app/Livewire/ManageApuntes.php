@@ -15,51 +15,7 @@ class ManageApuntes extends Component
 {
     use WithFileUploads;
 
-    public string $titulo = '';
-
-    public ?string $descripcion = null;
-
-    public string $materia_id = '';
-
-    /** @var mixed */
-    public $archivo = null;
-
     public string $search = '';
-
-    /** @var array<string, string> */
-    protected array $rules = [
-        'titulo' => 'required|min:3',
-        'descripcion' => 'nullable',
-        'materia_id' => 'required|exists:materias,id',
-        'archivo' => 'required|file|mimes:pdf,doc,docx|max:10240',
-    ];
-
-    /** @var array<string, string> */
-    protected array $messages = [
-        'titulo.required' => 'El título es obligatorio.',
-        'materia_id.required' => 'Debes seleccionar una materia.',
-        'archivo.required' => 'El archivo es obligatorio.',
-        'archivo.mimes' => 'Solo se permiten archivos PDF o Word.',
-        'archivo.max' => 'El archivo no puede superar los 10MB.',
-    ];
-
-    public function store(): void
-    {
-        $this->validate();
-
-        $ruta = $this->archivo->storeAs('apuntes/materia_'.$this->materia_id, $this->archivo->hashName(), 'public');
-
-        Apunte::create([
-            'user_id' => Auth::id(),
-            'materia_id' => $this->materia_id,
-            'titulo' => $this->titulo,
-            'descripcion' => $this->descripcion,
-            'ruta_archivo' => $ruta,
-        ]);
-
-        $this->reset(['titulo', 'descripcion', 'materia_id', 'archivo']);
-        session()->flash('message', 'Apunte subido correctamente.');
-    }
 
     public function delete(int $id): void
     {
@@ -76,7 +32,7 @@ class ManageApuntes extends Component
 
     public function render(): View
     {
-        $materias = Cache::remember('materias_'.Auth::id(), 3600, fn () => Materia::where('user_id', Auth::id())->get());
+        $materias = Materia::where('user_id', Auth::id())->get();
         $apuntes = Apunte::with(['user', 'materia'])
             ->where('user_id', Auth::id())
             ->where(function ($q) {

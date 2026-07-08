@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jungle Notes — Presentación</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        * { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .reveal { font-size: 28px; }
+        .reveal h1 { font-size: 2.8em; font-weight: 800; }
+        .reveal h2 { font-size: 1.8em; font-weight: 700; color: #059669; }
+        .reveal h3 { font-size: 1.3em; font-weight: 600; }
+        .reveal .slides section { padding: 20px; }
+        .gradient-text { background: linear-gradient(135deg, #059669, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .badge { display: inline-block; background: #059669; color: white; padding: 4px 14px; border-radius: 20px; font-size: 0.5em; font-weight: 700; margin-bottom: 10px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; text-align: left; }
+        .card { background: #f0fdf4; border-radius: 12px; padding: 16px; border: 1px solid #d1fae5; }
+        .card h4 { color: #059669; margin-bottom: 6px; font-weight: 700; }
+        .card p { font-size: 0.75em; color: #374151; }
+        .col { text-align: left; }
+        .col h4 { color: #059669; margin-bottom: 6px; font-weight: 700; font-size: 0.85em; }
+        .col ul { font-size: 0.75em; list-style: disc; padding-left: 20px; }
+        .col ul li { margin: 4px 0; }
+        table { font-size: 0.55em; width: 100%; border-collapse: collapse; }
+        th { background: #059669; color: white; padding: 6px 10px; }
+        td { padding: 5px 10px; border-bottom: 1px solid #d1fae5; font-size: 0.75em; }
+        .logo { font-size: 2em; font-weight: 800; color: #059669; }
+        .sub { color: #6b7280; font-size: 0.5em; font-weight: 400; }
+        .emoji-big { font-size: 2em; }
+        .footer { font-size: 0.4em; color: #9ca3af; margin-top: 30px; }
+        .check { color: #059669; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Portada -->
+            <section>
+                <div class="emoji-big">🌿</div>
+                <h1><span class="gradient-text">Jungle Notes</span></h1>
+                <p style="font-size:0.6em; color:#6b7280; margin-top:-10px;">Sistema de Gestión de Apuntes Universitarios</p>
+                <br>
+                <p style="font-size:0.45em;"><strong>Programación III</strong> — UTN FRRE</p>
+                <p style="font-size:0.45em;">Julio 2026</p>
+                <br>
+                <div style="display:flex; justify-content:center; gap:40px; font-size:0.4em;">
+                    <div><strong>Cardozo Emanuel</strong></div>
+                    <div><strong>Cardozo Mauricio</strong></div>
+                    <div><strong>Antonelli Lucas</strong></div>
+                    <div><strong>Britez Santiago</strong></div>
+                </div>
+            </section>
+
+            <!-- Slide 2: ¿Qué es Jungle Notes? -->
+            <section>
+                <h2>¿Qué es Jungle Notes?</h2>
+                <br>
+                <div class="grid-2">
+                    <div class="col">
+                        <h4>🎯 Propósito</h4>
+                        <p style="font-size:0.65em;">Plataforma web para centralizar, buscar, descargar y comentar apuntes académicos entre estudiantes universitarios.</p>
+                        <br>
+                        <h4>⚙️ Stack</h4>
+                        <ul>
+                            <li>Laravel 13 + PHP 8.4</li>
+                            <li>Livewire v4 + Flux UI v2</li>
+                            <li>Tailwind CSS v4</li>
+                            <li>SQLite / MySQL</li>
+                            <li>Laravel Fortify (Auth)</li>
+                            <li>FullCalendar v6</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>👥 Usuarios</h4>
+                        <p style="font-size:0.65em;">Estudiantes universitarios que necesitan organizar y compartir material de estudio.</p>
+                        <br>
+                        <h4>✨ Features clave</h4>
+                        <ul>
+                            <li>CRUD de Materias, Apuntes, Comentarios, Eventos</li>
+                            <li>Bloc de Notas personal</li>
+                            <li>Calendario académico</li>
+                            <li>API REST</li>
+                            <li>Responsive + Dark mode</li>
+                            <li>Búsqueda en tiempo real</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Modelos y Base de Datos -->
+            <section>
+                <h2>🗂️ Modelos y Base de Datos</h2>
+                <br>
+                <p style="font-size:0.5em; color:#6b7280;">6 modelos con migraciones, claves foráneas y relaciones</p>
+                <br>
+                <table>
+                    <thead><tr><th>Modelo</th><th>Relaciones</th><th>Camons clave</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>User</strong></td><td>hasMany Apuntes, Comentarios, Eventos, Notas</td><td>name, email, password</td></tr>
+                        <tr><td><strong>Materia</strong></td><td>belongsTo User, hasMany Apuntes</td><td>nombre, descripcion, anio</td></tr>
+                        <tr><td><strong>Apunte</strong></td><td>belongsTo User/Materia, hasMany Comentarios</td><td>titulo, descripcion, ruta_archivo</td></tr>
+                        <tr><td><strong>Comentario</strong></td><td>belongsTo User/Apunte</td><td>contenido</td></tr>
+                        <tr><td><strong>Evento</strong></td><td>belongsTo User</td><td>titulo, fecha_inicio, fecha_fin, tipo, color</td></tr>
+                        <tr><td><strong>Nota</strong></td><td>belongsTo User</td><td>contenido, fecha</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <div style="font-size:0.4em; background:#f0fdf4; padding:10px; border-radius:8px;">
+                    <strong>Relaciones clave:</strong> Materia → Apunte (1:N) · Apunte → Comentario (1:N) · User → Todo (1:N)
+                </div>
+            </section>
+
+            <!-- Slide 4: CRUDs -->
+            <section>
+                <h2>📝 CRUDs Completos</h2>
+                <br>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>📚 Materias</h4>
+                        <p>CRUD completo con formularios Blade. Grid con cards, contador de apuntes por materia y filtro por año.</p>
+                    </div>
+                    <div class="card">
+                        <h4>📄 Apuntes</h4>
+                        <p>CRUD vía Livewire. Subida de archivos (PDF/DOC), búsqueda en tiempo real, tabla relacional con comentarios anidados.</p>
+                    </div>
+                    <div class="card">
+                        <h4>💬 Comentarios</h4>
+                        <p>Creación y eliminación inline en cada apunte. Validación de contenido (3-500 chars).</p>
+                    </div>
+                    <div class="card">
+                        <h4>📅 Eventos</h4>
+                        <p>CRUD con modal Livewire + FullCalendar. Tipos: examen, presentación, otro. Selector de color.</p>
+                    </div>
+                    <div class="card">
+                        <h4>📝 Notas</h4>
+                        <p>Bloc de notas diario con calendario visual. Crear y eliminar notas por fecha.</p>
+                    </div>
+                    <div class="card">
+                        <h4>👤 Usuarios</h4>
+                        <p>Registro, login, password reset (Fortify). Perfil con ajustes y foto.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Vistas -->
+            <section>
+                <h2>🖼️ Vistas del Sistema</h2>
+                <br>
+                <div class="grid-3" style="font-size:0.5em;">
+                    <div class="col">
+                        <h4>🌐 Landing Page</h4>
+                        <ul>
+                            <li>Tema morado y verde</li>
+                            <li>Hero con CTA</li>
+                            <li>Login / Registro</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>📊 Dashboard</h4>
+                        <ul>
+                            <li>Métricas globales</li>
+                            <li>Últimos apuntes</li>
+                            <li>Actividad reciente</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>📚 Materias</h4>
+                        <ul>
+                            <li>Grid responsive</li>
+                            <li>Detalle con apuntes</li>
+                            <li>CRUD completo</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>📄 Apuntes</h4>
+                        <ul>
+                            <li>Tabla con búsqueda</li>
+                            <li>Comentarios anidados</li>
+                            <li>Subida de archivos</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>📅 Calendario</h4>
+                        <ul>
+                            <li>FullCalendar</li>
+                            <li>Modal Livewire</li>
+                            <li>Feriados argentinos</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>🧊 Equipo</h4>
+                        <ul>
+                            <li>Cards de integrantes</li>
+                            <li>Contacto</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="font-size:0.4em; color:#6b7280; margin-top:20px;">8 vistas personalizadas + sidebar responsivo con Flux UI</p>
+            </section>
+
+            <!-- Slide 6: API -->
+            <section>
+                <h2>🔌 API REST</h2>
+                <br>
+                <table>
+                    <thead><tr><th>Método</th><th>Endpoint</th><th>Descripción</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>GET</code></td><td><code>/api/apuntes</code></td><td>Listar todos los apuntes con user y materia</td></tr>
+                        <tr><td><code>POST</code></td><td><code>/api/apuntes</code></td><td>Subir apunte (multipart, PDF/DOC, max 10MB)</td></tr>
+                        <tr><td><code>GET</code></td><td><code>/api/calendario/eventos</code></td><td>Eventos del usuario + feriados argentinos</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <div style="font-size:0.45em; text-align:left; background:#f0fdf4; padding:12px; border-radius:8px;">
+                    <strong>Ejemplo GET /api/apuntes:</strong><br>
+                    <code style="font-size:0.7em;">[{id, titulo, ruta_archivo, user: {name}, materia: {nombre}}]</code>
+                </div>
+                <p style="font-size:0.4em; color:#6b7280; margin-top:15px;">✅ Documentación completa en API.md</p>
+            </section>
+
+            <!-- Slide 7: Autenticación -->
+            <section>
+                <h2>🔐 Autenticación</h2>
+                <br>
+                <div class="grid-2">
+                    <div class="col">
+                        <h4>Laravel Fortify</h4>
+                        <ul>
+                            <li>Registro con nombre, email y password</li>
+                            <li>Login con sesión</li>
+                            <li>Password reset</li>
+                            <li>Redirección a /dashboard</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>Acceso diferenciado</h4>
+                        <ul>
+                            <li><strong>Invitado:</strong> landing page con botones de login/registro</li>
+                            <li><strong>Autenticado:</strong> sidebar con navegación completa</li>
+                            <li>Middleware <code>auth</code> en rutas protegidas</li>
+                            <li>Solo dueño puede eliminar sus apuntes/comentarios</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Frontend -->
+            <section>
+                <h2>🎨 Frontend</h2>
+                <br>
+                <div class="grid-3" style="font-size:0.5em;">
+                    <div class="col">
+                        <h4>📱 Responsive</h4>
+                        <ul>
+                            <li>Tailwind CSS v4</li>
+                            <li>Sidebar colapsable</li>
+                            <li>Grids adaptativos</li>
+                            <li>Mobile-first</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>🌙 Dark Mode</h4>
+                        <ul>
+                            <li>Persistencia localStorage</li>
+                            <li>Detecta preferencia OS</li>
+                            <li>Paletas alternas</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>✨ Diseño</h4>
+                        <ul>
+                            <li>Flux UI componentes</li>
+                            <li>SVG icons</li>
+                            <li>Modales + cards</li>
+                            <li>Transiciones suaves</li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+                <div style="font-size:0.45em; display:flex; justify-content:center; gap:30px;">
+                    <span class="check">✅ Colores personalizados (verde esmeralda / violeta)</span>
+                    <span class="check">✅ Tipografía Plus Jakarta Sans</span>
+                    <span class="check">✅ Badges, tabs, botones con sombras</span>
+                </div>
+            </section>
+
+            <!-- Slide 9: Stack Técnico -->
+            <section>
+                <h2>🛠️ Stack Técnico</h2>
+                <br>
+                <div class="grid-2" style="font-size:0.5em;">
+                    <div class="col">
+                        <h4>Backend</h4>
+                        <ul>
+                            <li>Laravel 13 + PHP 8.4</li>
+                            <li>PHPStan level 7</li>
+                            <li>Pint (Laravel preset)</li>
+                            <li>SQLite / MySQL</li>
+                        </ul>
+                        <br>
+                        <h4>Frontend</h4>
+                        <ul>
+                            <li>Livewire v4</li>
+                            <li>Flux UI v2</li>
+                            <li>Tailwind CSS v4</li>
+                            <li>Vite + Alpine.js</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>Librerías</h4>
+                        <ul>
+                            <li>FullCalendar v6</li>
+                            <li>Laravel Fortify</li>
+                            <li>CarbonImmutable</li>
+                            <li>Fontsource (tipografía)</li>
+                        </ul>
+                        <br>
+                        <h4>Calidad</h4>
+                        <ul>
+                            <li>Tests con PHPUnit</li>
+                            <li>PHPStan level 7</li>
+                            <li>Pint auto-fix</li>
+                            <li>Composer scripts</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10: Instalación -->
+            <section>
+                <h2>🚀 Instalación</h2>
+                <br>
+                <pre style="font-size:0.35em; background:#1f2937; color:#e5e7eb; padding:16px; border-radius:8px; text-align:left;"><code># 1. Credenciales Flux
+composer config http-basic.composer.fluxui.dev "$USER" "$KEY"
+
+# 2. Dependencias
+composer install
+npm install && npm run build
+
+# 3. Entorno
+cp .env.example .env
+php artisan key:generate
+
+# 4. Base de datos
+php artisan migrate --seed
+
+# 5. Storage
+php artisan storage:link
+
+# 6. ¡A correr!
+composer dev</code></pre>
+            </section>
+
+            <!-- Slide 11: Equipo -->
+            <section>
+                <h2>🧊 Equipo Iceberg</h2>
+                <br>
+                <div class="grid-2" style="font-size:0.5em;">
+                    <div class="card" style="text-align:center;">
+                        <div style="font-size:2em; margin-bottom:8px;">👤</div>
+                        <h4>Cardozo Emanuel</h4>
+                        <p>Desarrollador Backend</p>
+                    </div>
+                    <div class="card" style="text-align:center;">
+                        <div style="font-size:2em; margin-bottom:8px;">👤</div>
+                        <h4>Cardozo Mauricio</h4>
+                        <p>Desarrollador Frontend</p>
+                    </div>
+                    <div class="card" style="text-align:center;">
+                        <div style="font-size:2em; margin-bottom:8px;">👤</div>
+                        <h4>Antonelli Lucas</h4>
+                        <p>Desarrollador Full Stack</p>
+                    </div>
+                    <div class="card" style="text-align:center;">
+                        <div style="font-size:2em; margin-bottom:8px;">👤</div>
+                        <h4>Britez Santiago</h4>
+                        <p>Desarrollador Full Stack</p>
+                    </div>
+                </div>
+                <p style="font-size:0.45em; color:#6b7280; margin-top:15px;">Proyecto desarrollado para Programación III — UTN FRRE</p>
+            </section>
+
+            <!-- Slide 12: Cierre -->
+            <section>
+                <div class="emoji-big">🌿</div>
+                <h1><span class="gradient-text">¡Gracias!</span></h1>
+                <br>
+                <p style="font-size:0.6em;">Jungle Notes — Apuntes organizados en un solo lugar.</p>
+                <br>
+                <div style="font-size:0.4em; color:#6b7280;">
+                    <p>🔗 <a href="#" style="color:#059669;">github.com/equipo-iceberg/jungle-notes</a></p>
+                    <p style="margin-top:20px;">Programación III — UTN FRRE — Julio 2026</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            width: 1200,
+            height: 700,
+        });
+    </script>
+</body>
+</html>
