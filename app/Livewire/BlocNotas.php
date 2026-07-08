@@ -87,6 +87,7 @@ class BlocNotas extends Component
         $diasConNotas = Nota::where('user_id', Auth::id())
             ->whereYear('fecha', $this->anioActual)
             ->whereMonth('fecha', $this->mesActual)
+            ->get()
             ->pluck('fecha')
             ->map(fn ($f) => $f->format('Y-m-d'))
             ->unique()
