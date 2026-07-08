@@ -38,7 +38,7 @@
 
             <flux:sidebar.nav>
                 <flux:sidebar.group :heading="__('Equipo')" class="grid">
-                    <flux:sidebar.item icon="users" :href="route('equipo')" :current="request()->routeIs('equipo')" wire:navigate>
+                    <flux:sidebar.item icon="users" :href="route('equipo.index')" :current="request()->routeIs('equipo')" wire:navigate>
                         {{ __('Equipo Iceberg') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
@@ -48,7 +48,7 @@
             
                   </flux:sidebar>
 
-        <!-- Mobile Header with User Menu -->
+        <!-- Mobile Header -->
         <flux:header class="lg:hidden bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-b border-neutral-100 dark:border-zinc-700">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
