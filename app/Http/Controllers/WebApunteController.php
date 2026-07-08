@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Apunte;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
 class WebApunteController extends Controller
 {
     public function store(Request $request): RedirectResponse
     {
-        if ($request->file('archivo') && !$request->file('archivo')->isValid()) {
-            dd("Error de PHP al subir: " . $request->file('archivo')->getErrorMessage());
+        /** @var UploadedFile|null $archivo */
+        $archivo = $request->file('archivo');
+
+        if ($archivo && !$archivo->isValid()) {
+            dd("Error de PHP al subir: " . $archivo->getErrorMessage());
         }
 
         $request->validate([
@@ -25,12 +29,13 @@ class WebApunteController extends Controller
             'archivo.required' => 'El archivo es obligatorio.',
             'archivo.mimes' => 'Solo se permiten archivos PDF o Word.',
             'archivo.max' => 'El archivo no puede superar los 10MB.',
-            'archivo.uploaded' => 'El servidor falló al procesar el archivo. El error interno es: ' . ($request->file('archivo') ? $request->file('archivo')->getErrorMessage() : 'Desconocido'),
+            'archivo.uploaded' => 'El servidor falló al procesar el archivo. El error interno es: ' . ($archivo ? $archivo->getErrorMessage() : 'Desconocido'),
         ]);
 
-        $path = $request->file('archivo')->storeAs(
+        /** @var UploadedFile $archivo */
+        $path = $archivo->storeAs(
             'apuntes/materia_'.$request->materia_id,
-            $request->file('archivo')->hashName(),
+            $archivo->hashName(),
             'public'
         );
 
