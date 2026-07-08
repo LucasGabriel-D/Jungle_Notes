@@ -23,3 +23,6 @@ yarn-error.log
 /.vscode
 /.zed
 /config/livewire.php
+
+# Knowledge pipeline (local)
+knowledge/

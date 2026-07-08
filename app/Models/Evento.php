@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Database\Factories\EventoFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
@@ -17,6 +19,9 @@ use Illuminate\Support\Carbon;
  */
 class Evento extends Model
 {
+    /** @use HasFactory<EventoFactory> */
+    use HasFactory;
+
     protected $fillable = [
         'user_id',
         'titulo',
