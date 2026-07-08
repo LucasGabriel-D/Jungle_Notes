@@ -85,13 +85,11 @@ class BlocNotas extends Component
             ->get();
 
         $diasConNotas = Nota::where('user_id', Auth::id())
-            ->whereYear('fecha', $this->anioActual)
-            ->whereMonth('fecha', $this->mesActual)
-            ->get()
-            ->pluck('fecha')
-            ->map(fn ($f) => $f->format('Y-m-d'))
-            ->unique()
-            ->toArray();
+        ->whereYear('fecha', $this->anioActual)
+        ->whereMonth('fecha', $this->mesActual)
+        ->pluck('fecha') 
+        ->map(fn($f) => \Carbon\Carbon::parse($f)->format('Y-m-d')) 
+        ->toArray();
 
         return view('livewire.bloc-notas', compact('notasDelDia', 'diasConNotas'));
     }
